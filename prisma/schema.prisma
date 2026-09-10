@@ -1,0 +1,266 @@
+// Pixora CMS — Faz 1 schema (Neon PostgreSQL)
+// Plan: docs/ADMIN_PLAN.md
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url = env("DATABASE_URL")
+}
+
+enum UserRole {
+  ADMIN
+  EDITOR
+}
+
+enum PublishStatus {
+  DRAFT
+  PUBLISHED
+  ARCHIVED
+}
+
+enum NavLocation {
+  HEADER
+  FOOTER
+  OFFCANVAS
+}
+
+model User {
+  id           String   @id @default(cuid())
+  email        String   @unique
+  name         String?
+  passwordHash String
+  role         UserRole @default(ADMIN)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  mediaUploads MediaAsset[]
+}
+
+model Locale {
+  id        String   @id @default(cuid())
+  code      String   @unique // en, tr, ...
+  name      String
+  isDefault Boolean  @default(false)
+  isActive  Boolean  @default(true)
+  sortOrder Int      @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  pageSectionTranslations PageSectionTranslation[]
+  projectTranslations     ProjectTranslation[]
+  postTranslations        PostTranslation[]
+  navItemTranslations     NavItemTranslation[]
+}
+
+/// Flat key/value settings (JSON). Prefer typed keys in app code.
+model Setting {
+  id        String   @id @default(cuid())
+  key       String   @unique
+  value     Json
+  updatedAt DateTime @updatedAt
+  createdAt DateTime @default(now())
+}
+
+model Page {
+  id        String         @id @default(cuid())
+  key       String         @unique // home | about | services | contact
+  status    PublishStatus  @default(PUBLISHED)
+  createdAt DateTime       @default(now())
+  updatedAt DateTime       @updatedAt
+  sections  PageSection[]
+}
+
+model PageSection {
+  id         String                   @id @default(cuid())
+  pageId     String
+  page       Page                     @relation(fields: [pageId], references: [id], onDelete: Cascade)
+  sectionKey String // hero, faq, offices, ...
+  type       String // mirrors sectionKey or richer type id
+  sortOrder  Int                      @default(0)
+  createdAt  DateTime                 @default(now())
+  updatedAt  DateTime                 @updatedAt
+  translations PageSectionTranslation[]
+
+  @@unique([pageId, sectionKey])
+  @@index([pageId, sortOrder])
+}
+
+model PageSectionTranslation {
+  id        String      @id @default(cuid())
+  sectionId String
+  section   PageSection @relation(fields: [sectionId], references: [id], onDelete: Cascade)
+  localeId  String
+  locale    Locale      @relation(fields: [localeId], references: [id], onDelete: Cascade)
+  payload   Json // section fields
+  updatedAt DateTime    @updatedAt
+  createdAt DateTime    @default(now())
+
+  @@unique([sectionId, localeId])
+}
+
+model Project {
+  id          String              @id @default(cuid())
+  slug        String              @unique
+  status      PublishStatus       @default(PUBLISHED)
+  year        String?
+  coverUrl    String?
+  siteUrl     String?
+  sortOrder   Int                 @default(0)
+  publishedAt DateTime?
+  createdAt   DateTime            @default(now())
+  updatedAt   DateTime            @updatedAt
+  tags        String[]            @default([])
+  translations ProjectTranslation[]
+  images      ProjectImage[]
+
+  @@index([status, sortOrder])
+}
+
+model ProjectTranslation {
+  id         String   @id @default(cuid())
+  projectId  String
+  project    Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  localeId   String
+  locale     Locale   @relation(fields: [localeId], references: [id], onDelete: Cascade)
+  title      String
+  about      String   @default("")
+  client     String   @default("")
+  expertise  String   @default("")
+  duration   String   @default("")
+  designer   String   @default("")
+  services   String[] @default([])
+  metrics    Json? // [{ value, label }]
+  nextSlug   String?
+  nextTitle  String?
+  nextMeta   String?
+  updatedAt  DateTime @updatedAt
+  createdAt  DateTime @default(now())
+
+  @@unique([projectId, localeId])
+}
+
+model ProjectImage {
+  id        String   @id @default(cuid())
+  projectId String
+  project   Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  url       String
+  alt       String?
+  sortOrder Int      @default(0)
+  createdAt DateTime @default(now())
+
+  @@index([projectId, sortOrder])
+}
+
+model Post {
+  id          String            @id @default(cuid())
+  slug        String            @unique
+  status      PublishStatus     @default(PUBLISHED)
+  coverUrl    String?
+  category    String?
+  authorName  String?
+  authorRole  String?
+  readTime    String?
+  comments    Int               @default(0)
+  publishedAt DateTime?
+  createdAt   DateTime          @default(now())
+  updatedAt   DateTime          @updatedAt
+  translations PostTranslation[]
+
+  @@index([status, publishedAt])
+}
+
+model PostTranslation {
+  id             String   @id @default(cuid())
+  postId         String
+  post           Post     @relation(fields: [postId], references: [id], onDelete: Cascade)
+  localeId       String
+  locale         Locale   @relation(fields: [localeId], references: [id], onDelete: Cascade)
+  title          String
+  excerpt        String   @default("")
+  body           String   @default("")
+  seoTitle       String?
+  seoDescription String?
+  updatedAt      DateTime @updatedAt
+  createdAt      DateTime @default(now())
+
+  @@unique([postId, localeId])
+}
+
+model MediaAsset {
+  id           String   @id @default(cuid())
+  url          String
+  path         String?
+  filename     String
+  mime         String
+  bytes        Int      @default(0)
+  width        Int?
+  height       Int?
+  alt          String?
+  uploadedById String?
+  uploadedBy   User?    @relation(fields: [uploadedById], references: [id], onDelete: SetNull)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  @@index([createdAt])
+}
+
+model ContactMessage {
+  id         String    @id @default(cuid())
+  name       String
+  email      String
+  subject    String
+  body       String
+  locale     String?
+  readAt     DateTime?
+  archivedAt DateTime?
+  createdAt  DateTime  @default(now())
+
+  @@index([createdAt])
+  @@index([readAt])
+}
+
+model NavItem {
+  id           String               @id @default(cuid())
+  location     NavLocation
+  href         String
+  sortOrder    Int                  @default(0)
+  parentId     String?
+  parent       NavItem?             @relation("NavTree", fields: [parentId], references: [id], onDelete: Cascade)
+  children     NavItem[]            @relation("NavTree")
+  createdAt    DateTime             @default(now())
+  updatedAt    DateTime             @updatedAt
+  translations NavItemTranslation[]
+
+  @@index([location, sortOrder])
+}
+
+model NavItemTranslation {
+  id        String   @id @default(cuid())
+  navItemId String
+  navItem   NavItem  @relation(fields: [navItemId], references: [id], onDelete: Cascade)
+  localeId  String
+  locale    Locale   @relation(fields: [localeId], references: [id], onDelete: Cascade)
+  label     String
+  updatedAt DateTime @updatedAt
+  createdAt DateTime @default(now())
+
+  @@unique([navItemId, localeId])
+}
+
+model AuditLog {
+  id         String   @id @default(cuid())
+  actorId    String?
+  actorEmail String?
+  action     String
+  entityType String
+  entityId   String?
+  meta       Json?
+  createdAt  DateTime @default(now())
+
+  @@index([createdAt])
+  @@index([entityType, createdAt])
+}
+
