@@ -400,7 +400,7 @@ export default function SeoSettingsForm() {
                     onChange={(e) => setSeo({ ...seo, canonicalBaseUrl: e.target.value })}
                   />
                   <span className="mt-1 block text-[11px] text-px-body">
-                    Sondaki slash olmadan (örn. https://pixora.studio). Boş bırakılırsa{" "}
+                    Sondaki slash olmadan (örn. https://getpixoria.com). Boş bırakılırsa{" "}
                     <code className="text-[10px]">NEXT_PUBLIC_SITE_URL</code> env
                     değeri kullanılır; o da yoksa canonical/sitemap göreli kalır.
                   </span>

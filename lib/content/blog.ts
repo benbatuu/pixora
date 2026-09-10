@@ -2,6 +2,7 @@
 import { prisma } from "@/lib/db/prisma";
 import {
   BLOG_POSTS as STUB_POSTS,
+  listStubPosts,
   type BlogPost,
 } from "@/app/data/blog";
 import { pickTranslation } from "@/lib/i18n/pick-translation";
@@ -69,11 +70,11 @@ export async function listPosts(opts?: {
       orderBy: [{ publishedAt: "desc" }, { createdAt: "desc" }],
       include,
     });
-    if (rows.length === 0) return STUB_POSTS;
+    if (rows.length === 0) return listStubPosts(locale);
     return rows.map((r) => mapPost(r as DbPost, locale, DEFAULT_LOCALE));
   } catch (e) {
     console.error("[content.listPosts]", e);
-    return STUB_POSTS;
+    return listStubPosts(locale);
   }
 }
 
@@ -86,11 +87,11 @@ export async function getPublishedPostBySlug(
       where: { slug, status: "PUBLISHED" },
       include,
     });
-    if (!row) return STUB_POSTS.find((p) => p.slug === slug) ?? null;
+    if (!row) return listStubPosts(locale).find((p) => p.slug === slug) ?? null;
     return mapPost(row as DbPost, locale, DEFAULT_LOCALE);
   } catch (e) {
     console.error("[content.getPublishedPostBySlug]", e);
-    return STUB_POSTS.find((p) => p.slug === slug) ?? null;
+    return listStubPosts(locale).find((p) => p.slug === slug) ?? null;
   }
 }
 

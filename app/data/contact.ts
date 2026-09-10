@@ -32,7 +32,7 @@ export const CONTACT_DEFAULTS: ContactContent = {
   inquiries: [
     {
       label: "Inquiries",
-      email: "contact@pixora.com",
+      email: "hello@getpixoria.com",
     },
     {
       label: "Raleigh",
@@ -48,19 +48,19 @@ export const CONTACT_DEFAULTS: ContactContent = {
       city: "London",
       lines: ["28 Foubert’s Place", "London W1F 7PR"],
       phone: "+44 (0)20 3667 7446",
-      email: "london@pixora.com",
+      email: "hello@getpixoria.com",
     },
     {
       city: "New York",
       lines: ["28 Foubert’s Place", "London W1F 7PR"],
       phone: "+44 (0)20 3667 7446",
-      email: "london@pixora.com",
+      email: "hello@getpixoria.com",
     },
     {
       city: "Singapore",
       lines: ["28 Foubert’s Place", "London W1F 7PR"],
       phone: "+44 (0)20 3667 7446",
-      email: "london@pixora.com",
+      email: "hello@getpixoria.com",
     },
   ],
   socials: ["LinkedIn", "Instagram", "Twitter"],

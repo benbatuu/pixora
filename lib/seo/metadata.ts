@@ -4,7 +4,7 @@ import type {
   SeoPageOverride,
   SeoPageLocaleCopy,
 } from "@/lib/admin/types";
-import { DEFAULT_LOCALE } from "@/lib/i18n/config";
+import { DEFAULT_LOCALE, PREFIX_LOCALES } from "@/lib/i18n/config";
 import { localizedPath } from "@/lib/i18n/path";
 
 function stripTrailingSlash(url: string) {
@@ -22,6 +22,31 @@ export function absoluteUrl(settings: SiteSettings, path: string): string | unde
   if (!base) return undefined;
   if (!path || path === "/") return base;
   return `${base}${path.startsWith("/") ? path : `/${path}`}`;
+}
+
+function ogLocaleCode(locale: string): string {
+  if (locale === "tr") return "tr_TR";
+  if (locale === "ru") return "ru_RU";
+  return "en_US";
+}
+
+/** hreflang map for an unprefixed path (`/about`, `/blog/slug`). */
+export function languageAlternateUrls(
+  settings: SiteSettings,
+  path: string,
+  defaultLocale: string = DEFAULT_LOCALE,
+): Record<string, string> | undefined {
+  const languages: Record<string, string> = {};
+  for (const code of PREFIX_LOCALES) {
+    const url = absoluteUrl(settings, localizedPath(path, code, defaultLocale));
+    if (url) languages[code] = url;
+  }
+  const xDefault = absoluteUrl(
+    settings,
+    localizedPath(path, defaultLocale, defaultLocale),
+  );
+  if (xDefault) languages["x-default"] = xDefault;
+  return Object.keys(languages).length ? languages : undefined;
 }
 
 export type ResolvedPageSeo = SeoPageLocaleCopy & {
@@ -143,7 +168,24 @@ export function buildRootMetadata(settings: SiteSettings): Metadata {
     },
     verification: Object.keys(verification).length ? verification : undefined,
     icons,
+    other: geoOther(settings),
   };
+}
+
+function geoOther(settings: SiteSettings): Metadata["other"] {
+  const geo = settings.geo;
+  if (!geo?.enabled) return undefined;
+  const other: Record<string, string> = {};
+  if (geo.region) other["geo.region"] = geo.region;
+  if (geo.placename) other["geo.placename"] = geo.placename;
+  if (typeof geo.latitude === "number" && typeof geo.longitude === "number") {
+    other["geo.position"] = `${geo.latitude};${geo.longitude}`;
+  }
+  if (geo.icbm) other.ICBM = geo.icbm;
+  else if (typeof geo.latitude === "number" && typeof geo.longitude === "number") {
+    other.ICBM = `${geo.latitude}, ${geo.longitude}`;
+  }
+  return Object.keys(other).length ? other : undefined;
 }
 
 export function buildPageMetadata(
@@ -156,6 +198,7 @@ export function buildPageMetadata(
     ogImageUrl?: string;
     locale?: string;
     fallbackLocale?: string;
+    ogType?: "website" | "article";
   },
 ): Metadata {
   const locale = opts?.locale ?? DEFAULT_LOCALE;
@@ -176,11 +219,16 @@ export function buildPageMetadata(
   const canonical = absoluteUrl(settings, path);
 
   const titleMeta = metadataTitle(title, settings.seo.titleTemplate);
+  const languages = languageAlternateUrls(settings, rawPath, fallbackLocale);
 
   return {
     title: titleMeta,
     description,
-    alternates: canonical ? { canonical } : undefined,
+    alternates: canonical
+      ? { canonical, languages }
+      : languages
+        ? { languages }
+        : undefined,
     robots: noindex
       ? { index: false, follow: settings.seo.robotsFollow !== false }
       : undefined,
@@ -189,7 +237,9 @@ export function buildPageMetadata(
       description,
       url: canonical,
       images: ogImage ? [{ url: ogImage }] : undefined,
-      type: (settings.seo.ogType as "website") || "website",
+      type: opts?.ogType ?? ((settings.seo.ogType as "website") || "website"),
+      locale: ogLocaleCode(locale),
+      alternateLocale: PREFIX_LOCALES.filter((c) => c !== locale).map(ogLocaleCode),
     },
     twitter: {
       card: settings.seo.twitterCard ?? "summary_large_image",

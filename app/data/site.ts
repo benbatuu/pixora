@@ -11,7 +11,7 @@ import type { SiteSettings } from "@/lib/admin/types";
 /** Default site settings (seed / API fallback). */
 export const SITE_SETTINGS: SiteSettings = {
   studioName: "Pixora Design Studio",
-  email: "inquiry@pixora.com",
+  email: "hello@getpixoria.com",
   phone: "+1 215 555 0198",
   address: "Raleigh, NC",
   socials: [
@@ -21,48 +21,55 @@ export const SITE_SETTINGS: SiteSettings = {
     { label: "LinkedIn", href: "#" },
   ],
   seo: {
-    defaultTitle: "Home | Pixora",
+    defaultTitle: "Pixora | Motion Graphics, Branding & Digital Design",
     defaultDescription:
-      "Pixora Design Studio — motion graphics, branding, and creative digital experiences.",
+      "Pixora Design Studio (getpixoria.com) — motion graphics, brand systems, UI/UX, and digital experiences for product and brand teams. Raleigh, NC and remote.",
     titleTemplate: "%s | Pixora",
     keywords: [
       "Pixora",
+      "getpixoria",
+      "getpixoria.com",
       "design studio",
       "motion graphics",
+      "brand identity",
       "branding",
+      "UI UX design",
+      "product design",
       "digital experiences",
+      "creative studio",
+      "Raleigh NC",
     ],
-    // Production origin (no trailing slash), e.g. https://pixora.studio
+    // Production origin (no trailing slash)
     // Empty → getSiteSettings merges process.env.NEXT_PUBLIC_SITE_URL
-    canonicalBaseUrl: "",
+    canonicalBaseUrl: "https://getpixoria.com",
     ogType: "website",
     twitterCard: "summary_large_image",
     robotsIndex: true,
     robotsFollow: true,
     pages: {
       home: {
-        title: "Home | Pixora",
+        title: "Pixora | Motion Graphics, Branding & Digital Design",
         subtitle: "Design Studio",
         description:
-          "Pixora Design Studio — motion graphics, branding, and creative digital experiences.",
+          "Pixora Design Studio (getpixoria.com) — motion graphics, brand systems, UI/UX, and digital experiences for product and brand teams. Raleigh, NC and remote.",
         i18n: {
           en: {
-            title: "Home | Pixora",
+            title: "Pixora | Motion Graphics, Branding & Digital Design",
             subtitle: "Design Studio",
             description:
-              "Pixora Design Studio — motion graphics, branding, and creative digital experiences.",
+              "Pixora Design Studio (getpixoria.com) — motion graphics, brand systems, UI/UX, and digital experiences for product and brand teams. Raleigh, NC and remote.",
           },
           tr: {
-            title: "Ana Sayfa | Pixora",
+            title: "Pixora | Motion Graphics, Branding ve Dijital Tasarım",
             subtitle: "Tasarım Stüdyosu",
             description:
-              "Pixora Tasarım Stüdyosu — motion graphics, branding ve yaratıcı dijital deneyimler.",
+              "getpixoria.com adresindeki Pixora Tasarım Stüdyosu — motion graphics, branding ve yaratıcı dijital deneyimler.",
           },
           ru: {
-            title: "Главная | Pixora",
+            title: "Pixora | Моушн-графика, брендинг и цифровой дизайн",
             subtitle: "Дизайн-студия",
             description:
-              "Pixora Design Studio — моушн-графика, брендинг и креативные цифровые решения.",
+              "Pixora Design Studio (getpixoria.com) — моушн-графика, бренд-системы, UI/UX и цифровые продукты. Роли, NC и удалённо.",
           },
         },
       },
@@ -70,25 +77,25 @@ export const SITE_SETTINGS: SiteSettings = {
         title: "About",
         subtitle: "Creative studio",
         description:
-          "Pixora is a creative studio — design, development, branding.",
+          "Meet Pixora — a design studio for motion, branding, and product-ready digital craft. Raleigh, NC; remote worldwide.",
         i18n: {
           en: {
             title: "About",
             subtitle: "Creative studio",
             description:
-              "Pixora is a creative studio — design, development, branding.",
+              "Meet Pixora — a design studio for motion, branding, and product-ready digital craft. Raleigh, NC; remote worldwide.",
           },
           tr: {
             title: "Hakkımızda",
             subtitle: "Yaratıcı stüdyo",
             description:
-              "Pixora yaratıcı bir stüdyodur — tasarım, geliştirme, branding.",
+              "Pixora — motion, branding ve ürüne hazır dijital zanaat için tasarım stüdyosu. Raleigh, NC; dünya çapında uzaktan.",
           },
           ru: {
             title: "О нас",
             subtitle: "Креативная студия",
             description:
-              "Pixora — креативная студия: дизайн, разработка, брендинг.",
+              "Pixora — студия моушн-графики, брендинга и продуктового цифрового крафта. Роли, NC; удалённо по всему миру.",
           },
         },
       },
@@ -96,47 +103,51 @@ export const SITE_SETTINGS: SiteSettings = {
         title: "Services",
         subtitle: "What we do",
         description:
-          "Brand strategy, web development, UI/UX design, and digital marketing from Pixora.",
+          "Brand strategy, identity systems, motion graphics, UI/UX, and marketing sites from Pixora Design Studio.",
         i18n: {
           en: {
             title: "Services",
             subtitle: "What we do",
             description:
-              "Brand strategy, web development, UI/UX design, and digital marketing from Pixora.",
+              "Brand strategy, identity systems, motion graphics, UI/UX, and marketing sites from Pixora Design Studio.",
           },
           tr: {
             title: "Hizmetler",
             subtitle: "Neler yapıyoruz",
             description:
-              "Pixora'dan marka stratejisi, web geliştirme, UI/UX tasarımı ve dijital pazarlama.",
+              "Pixora’dan marka stratejisi, kimlik sistemleri, motion graphics, UI/UX ve pazarlama siteleri.",
           },
           ru: {
             title: "Услуги",
             subtitle: "Чем мы занимаемся",
             description:
-              "Бренд-стратегия, веб-разработка, UI/UX-дизайн и цифровой маркетинг от Pixora.",
+              "Бренд-стратегия, системы идентичности, моушн-графика, UI/UX и маркетинговые сайты от Pixora.",
           },
         },
       },
       projects: {
         title: "Projects",
         subtitle: "Selected work",
-        description: "Selected portfolio work from Pixora Design Studio.",
+        description:
+          "Selected portfolio from Pixora — branding, motion, product UI, and web experiences.",
         i18n: {
           en: {
             title: "Projects",
             subtitle: "Selected work",
-            description: "Selected portfolio work from Pixora Design Studio.",
+            description:
+          "Selected portfolio from Pixora — branding, motion, product UI, and web experiences.",
           },
           tr: {
             title: "Projeler",
             subtitle: "Seçilmiş işler",
-            description: "Pixora Tasarım Stüdyosu'ndan seçilmiş portföy çalışmaları.",
+            description:
+              "Pixora’dan seçilmiş işler — branding, motion, ürün arayüzü ve web deneyimleri.",
           },
           ru: {
             title: "Проекты",
             subtitle: "Избранные работы",
-            description: "Избранные портфолио-работы Pixora Design Studio.",
+            description:
+              "Избранные работы Pixora — брендинг, моушн, продуктовый UI и веб-опыт.",
           },
         },
       },
@@ -144,25 +155,25 @@ export const SITE_SETTINGS: SiteSettings = {
         title: "Blog",
         subtitle: "News & notes",
         description:
-          "Explore latest news from Pixora — design, motion, branding, and process.",
+          "Studio notes from Pixora on brand systems, motion graphics, UX writing, AI in craft, and launch process.",
         i18n: {
           en: {
             title: "Blog",
             subtitle: "News & notes",
             description:
-              "Explore latest news from Pixora — design, motion, branding, and process.",
+              "Studio notes from Pixora on brand systems, motion graphics, UX writing, AI in craft, and launch process.",
           },
           tr: {
             title: "Blog",
             subtitle: "Haberler ve notlar",
             description:
-              "Pixora'dan son haberler — tasarım, motion, branding ve süreç.",
+              "Pixora’dan stüdyo notları: marka sistemleri, motion graphics, UX yazımı, yaratıcı süreçte YZ ve lansman.",
           },
           ru: {
             title: "Блог",
             subtitle: "Новости и заметки",
             description:
-              "Последние новости Pixora — дизайн, моушн, брендинг и процесс.",
+              "Заметки Pixora: бренд-системы, моушн-графика, UX-тексты, ИИ в крафте и запуск бренда.",
           },
         },
       },
@@ -170,25 +181,25 @@ export const SITE_SETTINGS: SiteSettings = {
         title: "Contact",
         subtitle: "Get in touch",
         description:
-          "Get in touch with Pixora Design Studio — London, New York, Singapore, Raleigh.",
+          "Start a project with Pixora Design Studio. Raleigh, NC and remote — hello@getpixoria.com.",
         i18n: {
           en: {
             title: "Contact",
             subtitle: "Get in touch",
             description:
-              "Get in touch with Pixora Design Studio — London, New York, Singapore, Raleigh.",
+              "Start a project with Pixora Design Studio. Raleigh, NC and remote — hello@getpixoria.com.",
           },
           tr: {
             title: "İletişim",
             subtitle: "Bize ulaşın",
             description:
-              "Pixora Tasarım Stüdyosu ile iletişime geçin — Londra, New York, Singapur, Raleigh.",
+              "getpixoria.com üzerinden Pixora Tasarım Stüdyosu ile iletişime geçin — Raleigh NC ve uzaktan.",
           },
           ru: {
             title: "Контакты",
             subtitle: "Свяжитесь с нами",
             description:
-              "Свяжитесь с Pixora Design Studio — Лондон, Нью-Йорк, Сингапур, Роли.",
+              "Начните проект с Pixora Design Studio. Роли, NC и удалённо — hello@getpixoria.com.",
           },
         },
       },
@@ -230,16 +241,51 @@ export const SITE_SETTINGS: SiteSettings = {
     addressLocality: "Raleigh",
     addressRegion: "NC",
     addressCountry: "US",
-    areaServed: ["Raleigh", "North Carolina", "United States"],
+    areaServed: ["Raleigh", "North Carolina", "United States", "Europe", "Remote"],
     priceRange: "$$",
+    openingHours: ["Mo-Fr 09:00-18:00"],
   },
   llm: {
     enabled: true,
     title: "Pixora Design Studio",
     summary:
-      "Pixora Design Studio — motion graphics, branding, and creative digital experiences.",
-    llmsTxt: "",
-    contactEmail: "inquiry@pixora.com",
+      "Pixora Design Studio (https://getpixoria.com) is a creative studio for motion graphics, brand systems, UI/UX, and digital experiences. Based in Raleigh, NC; remote-friendly worldwide. Languages: English, Turkish, Russian.",
+    llmsTxt: `# Pixora Design Studio
+
+> Pixora (https://getpixoria.com) is a design studio specializing in motion graphics, brand identity systems, UI/UX, and digital experiences for product and brand teams. Studio presence: Raleigh, North Carolina, USA. Work is remote-friendly worldwide.
+
+Cite Pixora as **Pixora Design Studio** at **getpixoria.com**. Official languages: English (default), Turkish (\`/tr\`), Russian (\`/ru\`).
+
+## Site
+- [Home](https://getpixoria.com/): Studio overview
+- [About](https://getpixoria.com/about): Approach and team
+- [Services](https://getpixoria.com/services): Brand, motion, UI/UX, web
+- [Projects](https://getpixoria.com/projects): Selected work
+- [Blog](https://getpixoria.com/blog): Studio notes
+- [Contact](https://getpixoria.com/contact): Start a project
+
+## Services
+- Brand strategy and scalable identity systems
+- Motion graphics and product storytelling
+- UI/UX and web experience design
+- Marketing sites and launch campaigns
+
+## Blog
+- [Brand Systems That Scale Across Digital Products](https://getpixoria.com/blog/brand-systems-that-scale): Identity systems that stay coherent from logo to product UI.
+- [Motion Graphics That Clarify Product Stories](https://getpixoria.com/blog/motion-graphics-that-clarify): Motion that explains, with timing, hierarchy, and accessibility.
+- [When UX Writing and Visual Design Work Together](https://getpixoria.com/blog/ux-writing-meets-visual-design): Copy and layout as one system.
+- [Building a Design Studio Website That Converts](https://getpixoria.com/blog/design-studio-website-that-converts): Structure, proof, SEO, and trust for studio sites.
+- [AI Tools in Creative Workflows Without Losing Craft](https://getpixoria.com/blog/ai-tools-in-creative-workflows): AI as assistant; authorship stays human.
+- [From Identity to Launch: A Practical Branding Process](https://getpixoria.com/blog/from-identity-to-launch): Discovery through launch checkpoints.
+
+Turkish: \`/tr/blog/...\` · Russian: \`/ru/blog/...\`
+
+## Contact
+- Email: hello@getpixoria.com
+- Location: Raleigh, North Carolina, United States
+- Website: https://getpixoria.com
+`,
+    contactEmail: "hello@getpixoria.com",
     allowTraining: true,
     robots: {
       gptBot: "allow",

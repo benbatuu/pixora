@@ -10,6 +10,7 @@ import {
 } from "@prisma/client";
 import { PROJECTS } from "../app/data/projects";
 import { BLOG_POSTS } from "../app/data/blog";
+import { BLOG_ARTICLES } from "../app/data/blog-articles";
 import { SITE_SETTINGS } from "../app/data/site";
 import { CONTACT_MESSAGES } from "../app/data/messages";
 import {
@@ -81,7 +82,7 @@ async function main() {
     hero: { title: "İletişime geç" },
     inquiries: {
       items: [
-        { label: "sorgular", email: "contact@pixora.com" },
+        { label: "sorgular", email: "hello@getpixoria.com" },
         {
           label: "Raleigh",
           lines: ["125 N. Harrington Street", "Raleigh, NC 27603", "919-833.6413"],
@@ -99,19 +100,19 @@ async function main() {
           city: "Londra",
           lines: ["28 Foubert's Place", "London W1F 7PR"],
           phone: "+44 (0)20 3667 7446",
-          email: "london@pixora.com",
+          email: "hello@getpixoria.com",
         },
         {
           city: "New York",
           lines: ["28 Foubert's Place", "London W1F 7PR"],
           phone: "+44 (0)20 3667 7446",
-          email: "london@pixora.com",
+          email: "hello@getpixoria.com",
         },
         {
           city: "Singapur",
           lines: ["28 Foubert's Place", "London W1F 7PR"],
           phone: "+44 (0)20 3667 7446",
-          email: "london@pixora.com",
+          email: "hello@getpixoria.com",
         },
       ],
     },
@@ -122,7 +123,7 @@ async function main() {
     hero: { title: "Связаться с нами" },
     inquiries: {
       items: [
-        { label: "Запросы", email: "contact@pixora.com" },
+        { label: "Запросы", email: "hello@getpixoria.com" },
         {
           label: "Raleigh",
           lines: ["125 N. Harrington Street", "Raleigh, NC 27603", "919-833.6413"],
@@ -140,19 +141,19 @@ async function main() {
           city: "Лондон",
           lines: ["28 Foubert's Place", "London W1F 7PR"],
           phone: "+44 (0)20 3667 7446",
-          email: "london@pixora.com",
+          email: "hello@getpixoria.com",
         },
         {
           city: "Нью-Йорк",
           lines: ["28 Foubert's Place", "London W1F 7PR"],
           phone: "+44 (0)20 3667 7446",
-          email: "london@pixora.com",
+          email: "hello@getpixoria.com",
         },
         {
           city: "Сингапур",
           lines: ["28 Foubert's Place", "London W1F 7PR"],
           phone: "+44 (0)20 3667 7446",
-          email: "london@pixora.com",
+          email: "hello@getpixoria.com",
         },
       ],
     },
@@ -903,153 +904,6 @@ async function main() {
     },
   };
 
-  const POST_BODY_EN: Record<string, string> = {
-    "keep-goals-in-sight": `## Using a Query
-
-We love to bring designs to life as a developer, and we aim to do this using whatever front-end tools are necessary. Preferred tools lean toward modern libraries like React — but we pick what fits the brief.
-
-There are several reasons a business would consider a rebrand, and it does not necessarily mean the business has been unsuccessful.
-
-## The Spark of an Idea
-
-Vision keeps creative teams aligned. Map the outcome first, then choose the stack, motion language, and content system that support it.
-
-> Success is the result of perfection, hard work, learning from failure, loyalty, and persistence.
-
-## Practical notes
-
-- Prefer clarity over novelty when shipping
-- Keep goals visible in every critique
-- Document decisions so the next sprint starts faster
-`,
-    "always-remember-your-goals": `## Stay aligned
-
-Vision and persistence keep creative teams aligned through every sprint. Write the goal on the wall — then design toward it.
-
-## Rituals that help
-
-1. Kickoff with a one-line success metric
-2. Mid-sprint check against the same metric
-3. Ship notes that mention what moved the needle
-`,
-    "never-lose-purpose": `## Purpose-led design
-
-Purpose-led design creates brands that feel intentional and memorable. Start with the why, then shape the identity system.
-
-Brand, product, and content should share one narrative spine.
-`,
-    "vision-drives-action": `## From vision to ship
-
-Clear vision turns ambitious ideas into shippable digital products. Break the vision into milestones the team can actually deliver.
-`,
-    "fueling-ambition": `## Systems for ambition
-
-Ambition needs systems — UX patterns that keep users moving forward. Remove friction, reward progress, measure what matters.
-`,
-    "creative-process-notes": `## Behind the scenes
-
-A look inside how Pixora shapes concepts into polished experiences — research, critique, craft, and launch.
-`,
-  };
-
-  const POST_TR: Record<string, { title: string; excerpt: string; body: string }> = {
-    "keep-goals-in-sight": {
-      title: "Hedefleri göz önünde tutun",
-      excerpt:
-        "Tasarımları kodda hayata geçirmeyi seviyoruz — ve işe gerçekten yarayan front-end araçlarını seçiyoruz.",
-      body: `## Sorgunun gücü
-
-Tasarımları geliştirici olarak hayata geçirmeyi seviyoruz. Modern araçlar (ör. React) tercih edilse de briefe en uygun olanı seçeriz.
-
-Bir işin yeniden markalaşmayı düşünmesinin birçok nedeni vardır; bu, başarısız olduğu anlamına gelmez.
-
-## Fikrin kıvılcımı
-
-Vizyon, ekipleri aynı ritimde tutar. Önce sonucu netleştirin; sonra stack, motion dili ve içerik sistemini ona göre seçin.
-
-> Başarı; mükemmellik, sıkı çalışma, başarısızlıktan öğrenme, sadakat ve sebatın sonucudur.
-`,
-    },
-    "always-remember-your-goals": {
-      title: "Hedeflerinizi her zaman hatırlayın",
-      excerpt:
-        "Net vizyon ve sebat, yaratıcı ekipleri her sprintte aynı hizada tutar.",
-      body: `## Hizada kalın
-
-Vizyon ve sebat, yaratıcı ekipleri her sprintte aynı ritimde tutar. Hedefi görünür kılın — sonra ona doğru tasarlayın.
-`,
-    },
-    "never-lose-purpose": {
-      title: "Amacı kaybetmeyin",
-      excerpt:
-        "Amaca dayalı tasarım, bilinçli ve akılda kalıcı markalar yaratır.",
-      body: `## Amaca dayalı tasarım
-
-Önce nedeni netleştirin; sonra kimlik sistemini şekillendirin. Marka, ürün ve içerik aynı anlatı omurgasını paylaşmalı.
-`,
-    },
-    "vision-drives-action": {
-      title: "Vizyon eylemi doğurur",
-      excerpt:
-        "Net vizyon, cesur fikirleri yayınlanabilir dijital ürünlere dönüştürür.",
-      body: `## Vizyondan yayına
-
-Vizyonu ekibin gerçekten teslim edebileceği kilometre taşlarına bölün.
-`,
-    },
-    "fueling-ambition": {
-      title: "Hırsı beslemek ve hedeflere ulaşmak",
-      excerpt:
-        "Hırsın sistemlere ihtiyacı vardır — kullanıcıyı ileri taşıyan UX kalıpları.",
-      body: `## Hırs için sistemler
-
-Sürtünmeyi azaltın, ilerlemeyi ödüllendirin, önemli olanı ölçün.
-`,
-    },
-    "creative-process-notes": {
-      title: "Yaratıcı süreçlerin perde arkası",
-      excerpt:
-        "Pixora’nın kavramları cilalı deneyimlere nasıl dönüştürdüğüne içeriden bir bakış.",
-      body: `## Perde arkası
-
-Araştırma, eleştiri, zanaat ve lansman — kavramdan cilalı deneyime.
-`,
-    },
-  };
-
-  const POST_RU_BODY: Record<string, string> = {
-    "keep-goals-in-sight": `## Используя запрос
-
-Мы любим оживлять дизайн в коде — и выбираем те front-end инструменты, которые действительно нужны задаче.
-
-## Искра идеи
-
-Видение держит команды в одном ритме. Сначала зафиксируйте результат, затем выбирайте стек и систему контента.
-
-> Успех — это результат совершенства, усердной работы, обучения на ошибках, лояльности и настойчивости.
-`,
-    "always-remember-your-goals": `## Оставайтесь в фокусе
-
-Ясное видение и настойчивость держат креативные команды в одном ритме на каждом спринте.
-`,
-    "never-lose-purpose": `## Дизайн со смыслом
-
-Начните с «зачем», затем выстраивайте систему идентичности.
-`,
-    "vision-drives-action": `## От видения к релизу
-
-Чёткое видение превращает смелые идеи в digital-продукты, которые можно выпустить.
-`,
-    "fueling-ambition": `## Системы для амбиций
-
-Амбициям нужны системы — UX-паттерны, которые ведут пользователя вперёд.
-`,
-    "creative-process-notes": `## За кулисами
-
-Как Pixora превращает концепции в отточенные впечатления.
-`,
-  };
-
 
   const PROJECT_RU: Record<
     string,
@@ -1181,38 +1035,6 @@ Araştırma, eleştiri, zanaat ve lansman — kavramdan cilalı deneyime.
     },
   };
 
-  const POST_RU: Record<string, { title: string; excerpt: string }> = {
-    "keep-goals-in-sight": {
-      title: "Держите цели в поле зрения",
-      excerpt:
-        "Мы любим оживлять дизайн в коде — и выбираем те front-end инструменты, которые действительно нужны задаче.",
-    },
-    "always-remember-your-goals": {
-      title: "Всегда помните о своих целях",
-      excerpt:
-        "Ясное видение и настойчивость держат креативные команды в одном ритме на каждом спринте.",
-    },
-    "never-lose-purpose": {
-      title: "Не теряйте смысл",
-      excerpt:
-        "Дизайн, основанный на цели, создаёт бренды, которые ощущаются осознанными и запоминаются.",
-    },
-    "vision-drives-action": {
-      title: "Видение двигает действие",
-      excerpt:
-        "Чёткое видение превращает смелые идеи в digital-продукты, которые можно выпустить.",
-    },
-    "fueling-ambition": {
-      title: "Подпитывая амбиции и достигая целей",
-      excerpt:
-        "Амбициям нужны системы — UX-паттерны, которые ведут пользователя вперёд.",
-    },
-    "creative-process-notes": {
-      title: "За кулисами креативных процессов",
-      excerpt:
-        "Как Pixora превращает концепции в отточенные впечатления — взгляд изнутри.",
-    },
-  };
 
   // Projects
   for (let i = 0; i < PROJECTS.length; i++) {
@@ -1361,7 +1183,7 @@ Araştırma, eleştiri, zanaat ve lansman — kavramdan cilalı deneyime.
     }
   }
 
-  // Blog posts
+  // Blog posts (copy from app/data/blog-articles.ts)
   for (const post of BLOG_POSTS) {
     const row = await prisma.post.upsert({
       where: { slug: post.slug },
@@ -1388,80 +1210,44 @@ Araştırma, eleştiri, zanaat ve lansman — kavramdan cilalı deneyime.
       },
     });
 
-    const enBody = POST_BODY_EN[post.slug] ?? post.excerpt;
-    await prisma.postTranslation.upsert({
-      where: {
-        postId_localeId: { postId: row.id, localeId: locale.id },
-      },
-      update: {
-        title: post.title,
-        excerpt: post.excerpt,
-        body: enBody,
-        seoTitle: post.title,
-        seoDescription: post.excerpt,
-      },
-      create: {
-        postId: row.id,
-        localeId: locale.id,
-        title: post.title,
-        excerpt: post.excerpt,
-        body: enBody,
-        seoTitle: post.title,
-        seoDescription: post.excerpt,
-      },
-    });
-
-    const trPost = POST_TR[post.slug];
-    if (trPost) {
+    const article = BLOG_ARTICLES[post.slug];
+    const copies = [
+      { localeId: locale.id, copy: article?.en },
+      { localeId: localeTr.id, copy: article?.tr },
+      { localeId: localeRu.id, copy: article?.ru },
+    ];
+    for (const { localeId, copy } of copies) {
+      if (!copy) continue;
       await prisma.postTranslation.upsert({
         where: {
-          postId_localeId: { postId: row.id, localeId: localeTr.id },
+          postId_localeId: { postId: row.id, localeId },
         },
         update: {
-          title: trPost.title,
-          excerpt: trPost.excerpt,
-          body: trPost.body,
-          seoTitle: trPost.title,
-          seoDescription: trPost.excerpt,
+          title: copy.title,
+          excerpt: copy.excerpt,
+          body: copy.body,
+          seoTitle: copy.seoTitle,
+          seoDescription: copy.seoDescription,
         },
         create: {
           postId: row.id,
-          localeId: localeTr.id,
-          title: trPost.title,
-          excerpt: trPost.excerpt,
-          body: trPost.body,
-          seoTitle: trPost.title,
-          seoDescription: trPost.excerpt,
-        },
-      });
-    }
-
-    const ruPost = POST_RU[post.slug];
-    if (ruPost) {
-      const ruBody = POST_RU_BODY[post.slug] ?? ruPost.excerpt;
-      await prisma.postTranslation.upsert({
-        where: {
-          postId_localeId: { postId: row.id, localeId: localeRu.id },
-        },
-        update: {
-          title: ruPost.title,
-          excerpt: ruPost.excerpt,
-          body: ruBody,
-          seoTitle: ruPost.title,
-          seoDescription: ruPost.excerpt,
-        },
-        create: {
-          postId: row.id,
-          localeId: localeRu.id,
-          title: ruPost.title,
-          excerpt: ruPost.excerpt,
-          body: ruBody,
-          seoTitle: ruPost.title,
-          seoDescription: ruPost.excerpt,
+          localeId,
+          title: copy.title,
+          excerpt: copy.excerpt,
+          body: copy.body,
+          seoTitle: copy.seoTitle,
+          seoDescription: copy.seoDescription,
         },
       });
     }
   }
+
+
+  // Remove posts that are no longer in stub data
+  const keepSlugs = BLOG_POSTS.map((p) => p.slug);
+  await prisma.post.deleteMany({
+    where: { slug: { notIn: keepSlugs } },
+  });
 
   // Nav (header + footer)
   const nav = [

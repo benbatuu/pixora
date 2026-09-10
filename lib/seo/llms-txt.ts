@@ -1,16 +1,25 @@
 import type { SiteSettings } from "@/lib/admin/types";
 import { getCanonicalBase } from "./metadata";
 
-const STATIC_PATHS: { path: string; label: string }[] = [
-  { path: "/", label: "Home" },
-  { path: "/about", label: "About" },
-  { path: "/services", label: "Services" },
-  { path: "/projects", label: "Projects" },
-  { path: "/blog", label: "Blog" },
-  { path: "/contact", label: "Contact" },
+const STATIC_PATHS: { path: string; label: string; note: string }[] = [
+  { path: "/", label: "Home", note: "Studio overview" },
+  { path: "/about", label: "About", note: "Studio, approach, team" },
+  { path: "/services", label: "Services", note: "Brand, motion, UI/UX, web" },
+  { path: "/projects", label: "Projects", note: "Selected work" },
+  { path: "/blog", label: "Blog", note: "Design, motion, branding, process" },
+  { path: "/contact", label: "Contact", note: "Start a project" },
 ];
 
-export function buildLlmsTxt(settings: SiteSettings): string {
+export type LlmsTxtPost = {
+  slug: string;
+  title: string;
+  excerpt?: string;
+};
+
+export function buildLlmsTxt(
+  settings: SiteSettings,
+  extras?: { posts?: LlmsTxtPost[] },
+): string {
   const custom = settings.llm?.llmsTxt?.trim();
   if (custom) return custom.endsWith("\n") ? custom : `${custom}\n`;
 
@@ -21,6 +30,9 @@ export function buildLlmsTxt(settings: SiteSettings): string {
   const contact =
     settings.llm?.contactEmail?.trim() || settings.email;
 
+  const href = (path: string) =>
+    base ? `${base}${path === "/" ? "" : path}` : path;
+
   const lines: string[] = [
     `# ${title}`,
     "",
@@ -30,14 +42,32 @@ export function buildLlmsTxt(settings: SiteSettings): string {
   ];
 
   for (const item of STATIC_PATHS) {
-    const url = base ? `${base}${item.path === "/" ? "" : item.path}` : item.path;
-    lines.push(`- [${item.label}](${url}): ${item.label} page`);
+    lines.push(`- [${item.label}](${href(item.path)}): ${item.note}`);
+  }
+
+  lines.push(
+    "",
+    "## Languages",
+    "",
+    "- English (default, unprefixed URLs)",
+    "- Turkish (`/tr/...`)",
+    "- Russian (`/ru/...`)",
+  );
+
+  const posts = extras?.posts?.filter((p) => p.slug && p.title) ?? [];
+  if (posts.length) {
+    lines.push("", "## Blog", "");
+    for (const post of posts) {
+      const note = post.excerpt?.trim() ? `: ${post.excerpt.trim()}` : "";
+      lines.push(`- [${post.title}](${href(`/blog/${post.slug}`)})${note}`);
+    }
   }
 
   lines.push("", "## Contact", "");
   lines.push(`- Email: ${contact}`);
   if (settings.phone) lines.push(`- Phone: ${settings.phone}`);
   if (settings.address) lines.push(`- Address: ${settings.address}`);
+  if (base) lines.push(`- Website: ${base}`);
 
   if (settings.llm?.allowTraining === false) {
     lines.push(

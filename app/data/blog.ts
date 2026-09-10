@@ -6,6 +6,8 @@
  * these arrays for primary admin counts or inbox.
  */
 
+import { BLOG_ARTICLES, getBlogArticleCopy } from "./blog-articles";
+
 export type BlogPost = {
   slug: string;
   title: string;
@@ -44,87 +46,127 @@ export const BLOG_FILTERS = [
   "3d modeling",
 ] as const;
 
-export const BLOG_POSTS: BlogPost[] = [
+type BlogMeta = {
+  slug: string;
+  date: string;
+  dateLabel: string;
+  category: string;
+  image: string;
+  author: string;
+  authorRole?: string;
+  readTime: string;
+  comments: number;
+  tags: string[];
+};
+
+const BLOG_META: BlogMeta[] = [
   {
-    slug: "keep-goals-in-sight",
-    title: "Keep Goals in Sight",
-    date: "2026-02-12",
-    dateLabel: "February 12, 2026",
-    category: "Design",
-    image: "/assets/img/project/project-2.jpg",
-    author: "James Carter",
-    authorRole: "Content writer",
-    readTime: "4 min read",
-    comments: 12,
-    excerpt:
-      "We love to bring designs to life as a developer, and I aim to do this using whatever front end tools are necessary.",
-  },
-  {
-    slug: "always-remember-your-goals",
-    title: "Always Remember Your Goals!",
-    date: "2026-02-18",
-    dateLabel: "February 18, 2026",
-    category: "Motion design",
-    image: "/assets/img/project/project-1.jpg",
-    author: "James Carter",
-    readTime: "5 min read",
-    comments: 8,
-    excerpt: "Vision and persistence keep creative teams aligned through every sprint.",
-  },
-  {
-    slug: "never-lose-purpose",
-    title: "Never Lose Purpose",
-    date: "2026-03-01",
-    dateLabel: "March 01, 2026",
+    slug: "brand-systems-that-scale",
+    date: "2026-03-03",
+    dateLabel: "March 03, 2026",
     category: "Branding",
     image: "/assets/img/project/project-3.jpg",
-    author: "James Carter",
-    readTime: "4 min read",
-    comments: 6,
-    excerpt: "Purpose-led design creates brands that feel intentional and memorable.",
+    author: "Pixora Studio",
+    authorRole: "Creative team",
+    readTime: "7 min read",
+    comments: 0,
+    tags: ["Branding", "Design systems", "Identity"],
   },
   {
-    slug: "vision-drives-action",
-    title: "Vision Drives Action",
-    date: "2026-03-05",
-    dateLabel: "March 05, 2026",
-    category: "AI Tools",
-    image: "/assets/img/project/project-4.jpg",
-    author: "James Carter",
+    slug: "motion-graphics-that-clarify",
+    date: "2026-03-12",
+    dateLabel: "March 12, 2026",
+    category: "Motion design",
+    image: "/assets/img/project/project-1.jpg",
+    author: "Pixora Studio",
+    authorRole: "Creative team",
     readTime: "6 min read",
-    comments: 4,
-    excerpt: "Clear vision turns ambitious ideas into shippable digital products.",
+    comments: 0,
+    tags: ["Motion design", "Product storytelling", "Animation"],
   },
   {
-    slug: "fueling-ambition",
-    title: "Fueling Ambition & Achieving Your Goals",
-    date: "2026-03-10",
-    dateLabel: "March 10, 2026",
+    slug: "ux-writing-meets-visual-design",
+    date: "2026-03-20",
+    dateLabel: "March 20, 2026",
     category: "UX",
     image: "/assets/img/project/project-5.jpg",
-    author: "James Carter",
-    readTime: "5 min read",
-    comments: 9,
-    excerpt: "Ambition needs systems — UX patterns that keep users moving forward.",
+    author: "Pixora Studio",
+    authorRole: "Creative team",
+    readTime: "6 min read",
+    comments: 0,
+    tags: ["UX", "UX writing", "UI design"],
   },
   {
-    slug: "creative-process-notes",
-    title: "Behind the Scenes of Creative Processes",
-    date: "2026-03-14",
-    dateLabel: "March 14, 2026",
+    slug: "design-studio-website-that-converts",
+    date: "2026-04-02",
+    dateLabel: "April 02, 2026",
     category: "Web experience",
+    image: "/assets/img/project/project-2.jpg",
+    author: "Pixora Studio",
+    authorRole: "Creative team",
+    readTime: "8 min read",
+    comments: 0,
+    tags: ["Web experience", "Conversion", "Studio sites"],
+  },
+  {
+    slug: "ai-tools-in-creative-workflows",
+    date: "2026-04-14",
+    dateLabel: "April 14, 2026",
+    category: "AI Tools",
+    image: "/assets/img/project/project-4.jpg",
+    author: "Pixora Studio",
+    authorRole: "Creative team",
+    readTime: "7 min read",
+    comments: 0,
+    tags: ["AI Tools", "Creative process", "Craft"],
+  },
+  {
+    slug: "from-identity-to-launch",
+    date: "2026-04-28",
+    dateLabel: "April 28, 2026",
+    category: "Design",
     image: "/assets/img/project/project-6.jpg",
-    author: "James Carter",
-    readTime: "4 min read",
-    comments: 3,
-    excerpt: "A look inside how Pixora shapes concepts into polished experiences.",
+    author: "Pixora Studio",
+    authorRole: "Creative team",
+    readTime: "8 min read",
+    comments: 0,
+    tags: ["Design", "Branding", "Process"],
   },
 ];
 
-export function getPost(slug: string) {
-  return BLOG_POSTS.find((p) => p.slug === slug);
+function postFromMeta(meta: BlogMeta, locale = "en"): BlogPost {
+  const copy = getBlogArticleCopy(meta.slug, locale) ?? BLOG_ARTICLES[meta.slug]?.en;
+  return {
+    slug: meta.slug,
+    date: meta.date,
+    dateLabel: meta.dateLabel,
+    category: meta.category,
+    image: meta.image,
+    author: meta.author,
+    authorRole: meta.authorRole,
+    readTime: meta.readTime,
+    comments: meta.comments,
+    tags: meta.tags,
+    title: copy?.title ?? meta.slug,
+    excerpt: copy?.excerpt ?? "",
+    body: copy?.body,
+    seoTitle: copy?.seoTitle,
+    seoDescription: copy?.seoDescription,
+  };
+}
+
+/** English stubs (seed + unlocalized fallback). */
+export const BLOG_POSTS: BlogPost[] = BLOG_META.map((meta) => postFromMeta(meta, "en"));
+
+export function getPost(slug: string, locale = "en") {
+  const meta = BLOG_META.find((p) => p.slug === slug);
+  return meta ? postFromMeta(meta, locale) : undefined;
 }
 
 export function getAllPostSlugs() {
-  return BLOG_POSTS.map((p) => p.slug);
+  return BLOG_META.map((p) => p.slug);
+}
+
+export function listStubPosts(locale = "en"): BlogPost[] {
+  return BLOG_META.map((meta) => postFromMeta(meta, locale));
 }

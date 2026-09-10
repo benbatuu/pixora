@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import BlogDetailContent from "../../../components/pages/BlogDetailContent";
+import { JsonLdNodes } from "../../../components/JsonLd";
 import {
   getAllPublishedPostSlugs,
   getPublishedPostBySlug,
@@ -9,7 +10,9 @@ import {
 import { getRequestLocale } from "@/lib/i18n/get-locale";
 import { getUi } from "@/lib/i18n/ui";
 import { getSiteSettings } from "@/lib/content/settings";
+import { getBlogArticleCopy } from "@/app/data/blog-articles";
 import { buildPageMetadata } from "@/lib/seo/metadata";
+import { buildArticleJsonLd, buildBreadcrumbJsonLd } from "@/lib/seo/json-ld";
 
 export const revalidate = 60;
 
@@ -36,6 +39,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     description: post.seoDescription?.trim() || post.excerpt,
     ogImageUrl: post.image || undefined,
     locale,
+    ogType: "article",
   });
 }
 
@@ -48,5 +52,38 @@ export default async function BlogDetailPage({ params }: Props) {
   const others = all.filter((p) => p.slug !== post.slug);
   const related = others.slice(0, 3);
   const latest = others.slice(0, 3);
-  return <BlogDetailContent post={post} related={related} latest={latest} ui={getUi(locale)} />;
+  const settings = await getSiteSettings();
+  const ui = getUi(locale);
+  const homeLabel =
+    locale === "tr" ? "Ana sayfa" : locale === "ru" ? "Главная" : "Home";
+  const blogLabel = locale === "ru" ? "Блог" : "Blog";
+  const articleCopy = getBlogArticleCopy(post.slug, locale);
+  const jsonLd = [
+    ...buildArticleJsonLd(settings, {
+      title: post.seoTitle?.trim() || post.title,
+      description: post.seoDescription?.trim() || post.excerpt,
+      path: `/blog/${post.slug}`,
+      image: post.image || undefined,
+      datePublished: post.date || undefined,
+      authorName: post.author,
+      locale,
+      keywords: post.tags,
+      faqs: articleCopy?.faqs,
+    }),
+    ...buildBreadcrumbJsonLd(
+      settings,
+      [
+        { name: homeLabel, path: "/" },
+        { name: blogLabel, path: "/blog" },
+        { name: post.title, path: `/blog/${post.slug}` },
+      ],
+      locale,
+    ),
+  ];
+  return (
+    <>
+      <JsonLdNodes nodes={jsonLd} />
+      <BlogDetailContent post={post} related={related} latest={latest} ui={ui} />
+    </>
+  );
 }

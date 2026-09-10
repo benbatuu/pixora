@@ -3,7 +3,7 @@ import { Inter } from "next/font/google";
 import SmoothScroll from "./components/SmoothScroll";
 import { getSiteSettings } from "@/lib/content/settings";
 import { buildRootMetadata } from "@/lib/seo/metadata";
-import { getDefaultLocaleCode } from "@/lib/i18n/get-locale";
+import { getRequestLocale } from "@/lib/i18n/get-locale";
 import "./globals.css";
 
 const inter = Inter({
@@ -24,7 +24,7 @@ export default async function RootLayout({
 }>) {
   let lang = "en";
   try {
-    lang = await getDefaultLocaleCode();
+    lang = await getRequestLocale();
   } catch {
     /* keep en */
   }

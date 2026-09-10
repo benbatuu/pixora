@@ -1,5 +1,7 @@
 # SEO, GEO & LLM settings
 
+Production canonical: **https://getpixoria.com** (`seo.canonicalBaseUrl` / `NEXT_PUBLIC_SITE_URL`).
+
 Admin UI: **SEO & AI** → `/admin/seo` (ADMIN only). Data: `Setting.key = "site"` nested `seo` / `geo` / `llm`.
 
 ## SEO tab
@@ -19,7 +21,9 @@ Applied via `buildRootMetadata` / `buildPageMetadata` in `lib/seo/metadata.ts`. 
 
 ## GEO tab
 
-When `geo.enabled`, public layout emits JSON-LD (`WebSite` + `Organization` | `LocalBusiness` | `ProfessionalService`) with address, `geo` coordinates, `sameAs` from socials, and logo from brand.
+When `geo.enabled`, public layout emits JSON-LD (`WebSite` + `Organization` | `LocalBusiness` | `ProfessionalService`) with address, `geo` coordinates, `knowsLanguage`, `sameAs` from socials, and logo from brand. Root metadata also outputs `geo.region` / `geo.placename` / `geo.position` / `ICBM` when set.
+
+Blog posts add `BlogPosting` + `FAQPage` JSON-LD (from `app/data/blog-articles.ts`) and Open Graph `article` type.
 
 ## LLM tab
 
@@ -37,3 +41,16 @@ When `geo.enabled`, public layout emits JSON-LD (`WebSite` + `Organization` | `L
 | `/llms.txt` | `app/llms.txt/route.ts` |
 
 Settings PUT revalidates `/`, main pages, `/robots.txt`, `/sitemap.xml`, `/llms.txt`.
+
+## Blog (6 posts, EN / TR / RU)
+
+Source of truth: `app/data/blog-articles.ts` (seed + DB-empty fallback). Slugs:
+
+- `/blog/brand-systems-that-scale`
+- `/blog/motion-graphics-that-clarify`
+- `/blog/ux-writing-meets-visual-design`
+- `/blog/design-studio-website-that-converts`
+- `/blog/ai-tools-in-creative-workflows`
+- `/blog/from-identity-to-launch`
+
+Locale URLs: `/tr/blog/...`, `/ru/blog/...`. Re-seed with `pnpm db:seed` after copy changes.

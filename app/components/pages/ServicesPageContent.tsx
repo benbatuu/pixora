@@ -587,11 +587,11 @@ export default function ServicesPageContent({
           <div className="w-full px-16">
             <div className="grid grid-cols-1 items-center gap-6 py-[19px] md:grid-cols-2">
               <div className="px-social-mail [&_a]:inline-flex [&_a]:items-center [&_a]:text-[clamp(18px,2vw,26px)] [&_a]:font-semibold [&_a]:leading-none [&_a]:tracking-[-0.02em] [&_a]:text-white [&_a]:no-underline [&_a_span]:mr-2.5 [&_a_span]:inline-flex">
-                <a className="px-line-lr text-white" href="mailto:inquiry@pixora.com">
+                <a className="px-line-lr text-white" href="mailto:hello@getpixoria.com">
                   <span>
                     <MailIcon />
                   </span>
-                  inquiry@pixora.com
+                  hello@getpixoria.com
                 </a>
               </div>
               <div className="px-social-subscribe flex w-full justify-start md:justify-end">
