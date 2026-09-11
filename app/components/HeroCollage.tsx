@@ -77,17 +77,17 @@ export default function HeroCollage({
       </div>
 
       {/* Mobile / tablet — simplified thumbs + caption */}
-      <div className="px-hero-2-slider xl:hidden">
-        <div className="w-full px-16 pb-[60px]">
+      <div className="px-hero-2-slider xl:hidden ">
+        <div className="w-full pb-12">
           <div className="mb-8 text-center">
-            <p className="font-thunder text-[clamp(28px,6vw,42px)] leading-[0.95] text-[var(--px-black)]">
+            <p className="font-thunder text-[clamp(28px,6vw,42px)] leading-[0.95] text-(--px-black)">
               {ITEMS[active].title}
             </p>
-            <p className="mt-1 font-thunder text-[clamp(18px,4vw,28px)] leading-[0.95] text-[var(--px-body)]">
+            <p className="mt-1 font-thunder text-[clamp(18px,4vw,28px)] leading-[0.95] text-(--px-body)">
               {ITEMS[active].subtitle}
             </p>
           </div>
-          <div className="flex gap-3 overflow-x-auto pb-2">
+          <div className="flex gap-3 overflow-x-auto pb-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
             {ITEMS.map((item, i) => (
               <button
                 key={item.src}
@@ -114,13 +114,13 @@ export default function HeroCollage({
       <div className="w-full">
         <div className="px-hero-2-bottom relative p-relative text-center px-fade-anim" data-delay=".3">
           <h4 className="flex items-end justify-center gap-3 md:gap-6">
-            <span className="font-thunder text-[clamp(72px,14vw,220px)] font-bold uppercase leading-[0.85] tracking-[-0.03em] text-px-black">{bottomLeft}</span>
-            <i className="hidden xl:block [&_span]:font-thunder [&_span]:text-[clamp(28px,3vw,48px)] [&_span]:font-medium [&_span]:uppercase [&_span]:leading-none [&_span]:text-px-body">
+            <span className="font-thunder text-5xl md:text-8xl lg:text-9xl font-bold uppercase leading-[0.85] tracking-[-0.03em] text-px-black">{bottomLeft}</span>
+            <i className="hidden xl:block text-4xl">
               <span className="inline-block max-w-[12ch] whitespace-pre-line text-center">
                 {bottomTagline}
               </span>
             </i>
-            <span className="font-thunder text-[clamp(72px,14vw,220px)] font-bold uppercase leading-[0.85] tracking-[-0.03em] text-px-black">{bottomRight}</span>
+            <span className="font-thunder text-5xl md:text-8xl lg:text-9xl font-bold uppercase leading-[0.85] tracking-[-0.03em] text-px-black">{bottomRight}</span>
           </h4>
           <p className="mt-4 text-center text-sm text-[var(--px-black)] xl:hidden">
             {bottomTagline}

@@ -127,7 +127,7 @@ export default function LanguageSwitcher({
     >
       <button
         type="button"
-        className={`inline-flex items-center gap-1.5 rounded-full border px-3 py-1.5 text-[11px] font-semibold uppercase leading-none tracking-[0.14em] backdrop-blur-md transition-[border-color,background,color] duration-200 ${trigger}`}
+        className={`inline-flex items-center gap-1.5 rounded-full border py-3 px-6 text-[11px] font-semibold uppercase leading-none tracking-[0.14em] backdrop-blur-md transition-[border-color,background,color] duration-200 ${trigger}`}
         aria-label={label}
         aria-haspopup="listbox"
         aria-expanded={open}
@@ -135,9 +135,9 @@ export default function LanguageSwitcher({
         disabled={pending}
         onClick={() => setOpen((v) => !v)}
       >
-        <span>{current.code.toUpperCase()}</span>
+        <span className="text-[14px]">{current.code.toUpperCase()}</span>
         <ChevronDown
-          className={`h-3.5 w-3.5 opacity-60 transition-transform duration-200 ${open ? "rotate-180" : ""}`}
+          className={`h-6 w-6 opacity-60 transition-transform duration-200 ${open ? "rotate-180" : ""}`}
           aria-hidden
         />
       </button>
@@ -147,7 +147,7 @@ export default function LanguageSwitcher({
           id={listId}
           role="listbox"
           aria-label={label}
-          className={`absolute ${menuAlign} top-[calc(100%+8px)] z-[120] min-w-[10.5rem] overflow-hidden rounded-2xl border py-1 ${panel}`}
+          className={`absolute ${menuAlign} top-[calc(100%+8px)] z-[120] min-w-36 pr-2 pl-1 py-1 overflow-hidden rounded-2xl border ${panel}`}
         >
           {locales.map((l) => {
             const active = l.code === activeLocale;
@@ -156,7 +156,7 @@ export default function LanguageSwitcher({
                 <button
                   type="button"
                   onClick={() => switchTo(l.code)}
-                  className={`flex w-full items-center justify-between gap-3 px-3.5 py-2.5 text-left text-[12px] font-medium tracking-[0.02em] transition-colors ${
+                  className={`flex w-full items-center justify-between gap-3 p-4 m-1 rounded-lg text-[12px] font-medium tracking-[0.02em] transition-colors ${
                     active ? itemActive : itemIdle
                   }`}
                 >

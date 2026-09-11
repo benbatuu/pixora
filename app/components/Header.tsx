@@ -122,6 +122,7 @@ export default function Header({
   const chrome = getChrome(settings, locale);
   const pathname = usePathname() || "/";
   const [open, setOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
   const items = navItems?.length ? navItems : FALLBACK_NAV;
   const logoUrl = settings.brand?.logoLightUrl || SITE_SETTINGS.brand.logoLightUrl;
   const logoAlt = settings.brand?.logoAlt || SITE_SETTINGS.brand.logoAlt;
@@ -155,66 +156,87 @@ export default function Header({
     return () => window.clearTimeout(t);
   }, [pathname]);
 
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 20);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  const showGlass = scrolled && !open;
+
   return (
     <>
-      <header className="pointer-events-none fixed inset-x-0 top-0 z-[80] pt-10">
-        <div className="px-16">
-          <div className="flex items-center justify-between gap-4">
-            <div className="px-header-logo">
-              <Link href={localizedPath("/", locale, defaultLocale)} className="pointer-events-auto relative z-[90]">
-                <Image
-                  src={logoUrl}
-                  alt={logoAlt}
-                  width={110}
-                  height={39}
-                  className="h-auto w-[110px]"
-                  priority
-                />
-              </Link>
-            </div>
+      {/* ── Header bar ──────────────────────────────────────────── */}
+      <header
+        className={`pointer-events-none fixed inset-x-0 top-0 z-80 p-2 md:p-4 lg:p-6 transition-all duration-300 ${open ? "pt-8 p-8 md:p-16 lg:p-16 xl:p-16" : "p-0"} ${
+          showGlass
+            ? "bg-white/10 backdrop-blur-md backdrop-saturate-150 border-b border-white/10 shadow-[0_4px_30px_rgba(0,0,0,0.1)]"
+            : "bg-transparent"
+        }`}
+      >
+        <div className="flex items-center justify-between gap-3 sm:gap-4">
+          {/* Logo */}
+          <Link
+            href={localizedPath("/", locale, defaultLocale)}
+            className="pointer-events-auto relative z-90 shrink-0"
+          >
+            <Image
+              src={logoUrl}
+              alt={logoAlt}
+              width={110}
+              height={39}
+              className="h-auto w-36 px-3 md:px-0 lg:px-0"
+              priority
+            />
+          </Link>
 
-            <div className="px-header-2-bar text-end flex items-center justify-end gap-4">
-              <LanguageSwitcher
-                locale={locale}
-                locales={locales}
-                defaultLocale={defaultLocale}
-                variant="header"
-                className="relative z-[90]"
-                label={chrome.languageLabel}
-              />
-              <button
-                type="button"
-                className={`tp-hamburger-btn hamburger-btn pointer-events-auto relative z-[90] ${
-                  open ? "is-open" : ""
-                }`}
-                aria-label={open ? messages.closeMenu : messages.openMenu}
-                aria-expanded={open}
-                aria-controls="offcanvasMenu"
-                onClick={() => setOpen((v) => !v)}
-              >
-                {open ? (
-                  <span className="hamburger-x" aria-hidden>
-                    <XIcon />
-                  </span>
-                ) : (
-                  <>
-                    <MenuIcon />
-                  </>
-                )}
-              </button>
-            </div>
+          {/* Right controls */}
+          <div className="flex items-center justify-end gap-2 sm:gap-3 lg:gap-4 px-4 md:px-0">
+            <LanguageSwitcher
+              locale={locale}
+              locales={locales}
+              defaultLocale={defaultLocale}
+              variant="header"
+              className="pointer-events-auto relative z-90 hidden sm:block"
+              label={chrome.languageLabel}
+            />
+
+            {/* Hamburger / close button (was .tp-hamburger-btn / .hamburger-btn) */}
+            <button
+              type="button"
+              className={`pointer-events-auto relative z-90 inline-grid h-14 w-14 origin-right scale-[0.72] sm:scale-[0.85] lg:scale-100 place-items-center rounded-full border-0 p-0 shadow-[0_8px_28px_rgba(0,0,0,0.12)] transition-colors duration-300 cursor-pointer ${
+                open ? "bg-px-black text-white" : "bg-white text-px-black"
+              }`}
+              aria-label={open ? messages.closeMenu : messages.openMenu}
+              aria-expanded={open}
+              aria-controls="offcanvasMenu"
+              onClick={() => setOpen((v) => !v)}
+            >
+              {open ? <XIcon /> : <MenuIcon />}
+            </button>
           </div>
         </div>
       </header>
 
+      {/* ── Offcanvas menu (was .px-offcanvas-2-area and children) ─ */}
       <div
         id="offcanvasMenu"
-        className={`px-offcanvas-2-area${open ? " menu-open" : ""}`}
         aria-hidden={!open}
+        className={`fixed inset-0 z-70 h-full w-full transition-[visibility] duration-0 ${
+          open ? "visible pointer-events-auto delay-0 p-5 md:p-0 lg:p-0" : "invisible pointer-events-none delay-1000 px-8 pt-0"
+        }`}
       >
-        <div className="offcanvas-bg">
+        {/* Background panel with clip-path reveal */}
+        <div
+          className={`fixed inset-0 -z-10 overflow-hidden rounded-2xl bg-px-black shadow-[0_24px_80px_rgba(0,0,0,0.35)] transition-[clip-path] duration-700 ease-in-out m-5 md:rounded-[20px] ${
+            open
+              ? "delay-0 [clip-path:circle(150%_at_calc(100%-45px)_45px)]"
+              : "delay-400 [clip-path:circle(0%_at_calc(100%-45px)_45px)]"
+          }`}
+        >
           <video
-            className="px-offcanvas-bg-video"
+            className="pointer-events-none absolute inset-0 h-full w-full object-cover opacity-[0.55]"
             loop
             muted
             playsInline
@@ -223,29 +245,40 @@ export default function Header({
           >
             <source src="/assets/video/menu-bg-smoke.mp4" type="video/mp4" />
           </video>
-          <div className="px-offcanvas-bg-dim" aria-hidden />
+          <div
+            className="pointer-events-none absolute inset-0 [background:linear-gradient(105deg,rgba(10,10,10,0.72)_0%,rgba(10,10,10,0.45)_45%,rgba(10,10,10,0.7)_100%)]"
+            aria-hidden
+          />
         </div>
 
-        <div className="px-offcanvas-2-wrapper offcanvas-menu">
-          <div className="px-offcanvas-2-grid">
-            <div className="px-offcanvas-2-left">
-              <nav className="tp-offcanvas-menu" aria-label={messages.primaryNav}>
-                <ul>
+        {/* Content wrapper */}
+        <div
+          className={`relative z-1 h-full px-0 md:px-7.5 pt-24 md:p-36 pb-10 ${
+            open ? "pointer-events-auto" : "pointer-events-none"
+          }`}
+        >
+          <div className={`grid h-full max-h-[calc(100vh-140px)] grid-cols-1 items-start gap-8 min-[992px]:grid-cols-2 min-[992px]:items-center min-[992px]:gap-12 ${open ? "p-5 md:p-8" : "p-0"}`}>
+            {/* Nav links (was .px-offcanvas-2-left) */}
+            <div
+              className={`transition-[opacity,transform] duration-700 ease-[cubic-bezier(0.2,0.8,0.2,1)] ${
+                open ? "translate-y-0 opacity-100 delay-760" : "translate-y-7.5 opacity-0 delay-600"
+              }`}
+            >
+              <nav aria-label={messages.primaryNav}>
+                <ul className="m-0 list-none p-0 [&>li:not(:last-child)]:mb-4.5 min-[992px]:[&>li:not(:last-child)]:mb-5.5">
                   {items.map((item) => {
                     const active = isActivePath(pathname, item.href);
                     const href = localizedPath(item.href, locale, defaultLocale);
                     return (
-                      <li key={`${item.href}-${item.label}`} className={active ? "is-active" : ""}>
-                        <div className="px-offcanvas-link-row">
+                      <li key={`${item.href}-${item.label}`}>
+                        <div className="flex items-center justify-start gap-6">
                           <Link
                             href={href}
                             aria-current={active ? "page" : undefined}
-                            className={
-                              active
-                                ? "is-active text-[#e11010]"
-                                : "text-white"
-                            }
                             onClick={() => setOpen(false)}
+                            className={`font-thunder text-[clamp(64px,9vw,120px)] font-bold uppercase leading-[0.82] tracking-[0.06em] ${
+                              active ? "text-px-red" : "text-white"
+                            }`}
                           >
                             {item.label}
                           </Link>
@@ -255,49 +288,47 @@ export default function Header({
                   })}
                 </ul>
               </nav>
-
-              <div className="mt-10 pointer-events-auto">
-                <p className="mb-3 text-[10px] font-semibold uppercase tracking-[0.16em] text-white/45">
-                  {chrome.languageLabel}
-                </p>
-                <LanguageSwitcher
-                  locale={locale}
-                  locales={locales}
-                  defaultLocale={defaultLocale}
-                  variant="menu"
-                  label={chrome.languageLabel}
-                />
-              </div>
-
             </div>
 
-            <div className="px-offcanvas-2-right">
-              <div className="px-offcanvas-2-info text-white">
-                <p className="px-offcanvas-2-info-label">{chrome.offcanvasLabel}</p>
-                <h3 className="px-offcanvas-2-info-title whitespace-pre-line">
+            {/* Contact / social (was .px-offcanvas-2-right) */}
+            <div
+              className={`flex w-full min-h-[200px] flex-col items-start justify-end gap-5 transition-[opacity,transform] duration-700 [transition-timing-function:cubic-bezier(0.2,0.8,0.2,1)] min-[992px]:items-end ${
+                open ? "translate-y-0 opacity-100 delay-[1310ms] w-full p-0" : "translate-y-[30px] opacity-0 delay-0"
+              }`}
+            >
+              <div className="w-full max-w-none text-white min-[992px]:max-w-[420px] min-[992px]:text-right">
+                <p className="mb-3 text-xs font-semibold uppercase tracking-[0.16em] text-white/45">
+                  {chrome.offcanvasLabel}
+                </p>
+                <h3 className={`font-thunder mb-[22px] whitespace-pre-line md:whitespace-pre-line lg:whitespace-pre-line text-[clamp(36px,4vw,56px)] font-semibold uppercase leading-[0.95] tracking-[-0.02em] text-white`}>
                   {chrome.offcanvasTitle}
                 </h3>
                 <a
                   href={`mailto:${chrome.offcanvasEmail}`}
-                  className="px-offcanvas-2-info-link"
+                  className="mb-2 block text-[clamp(18px,2vw,24px)] font-medium text-white transition-colors duration-300 hover:text-[#e11010]"
                 >
                   {chrome.offcanvasEmail}
                 </a>
                 <a
                   href={`tel:${chrome.offcanvasPhone.replace(/[^\d+]/g, "")}`}
-                  className="px-offcanvas-2-info-link"
+                  className="mb-2 block text-[clamp(18px,2vw,24px)] font-medium text-white transition-colors duration-300 hover:text-[#e11010]"
                 >
                   {chrome.offcanvasPhone}
                 </a>
-                <p className="px-offcanvas-2-info-meta whitespace-pre-line">
+                <p className="mt-[18px] whitespace-nowrap md:whitespace-pre-line lg:whitespace-pre-line text-sm font-medium leading-[1.5] text-white/50">
                   {chrome.offcanvasMeta}
                 </p>
               </div>
-              <div className="px-offcanvas-2-social tp-offcanvas-social text-white">
-                <ul>
+ 
+              <div className="w-full text-white">
+                <ul className="m-0 flex list-none items-center justify-start gap-2 p-0 min-[992px]:justify-end">
                   {resolvedSocials.map((s) => (
                     <li key={s.label}>
-                      <a href={s.href} aria-label={s.label}>
+                      <a
+                        href={s.href}
+                        aria-label={s.label}
+                        className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-[#1e1e1e] text-white transition-colors duration-300 hover:bg-[#e11010]"
+                      >
                         {s.icon}
                       </a>
                     </li>
