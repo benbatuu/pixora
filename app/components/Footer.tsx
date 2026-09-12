@@ -117,94 +117,56 @@ export default function Footer({
       className="bg-[#0a0a0a] text-white"
       style={{ backgroundColor: "#0a0a0a" }}
     >
-      <div className="px-footer-area pt-[125px] pb-[35px]">
-        <div className="w-full px-16">
-          <div className="flex flex-wrap items-start gap-y-10">
-            <div className="w-full pb-10 lg:w-1/3 xl:w-1/3">
-              <div
-                className="px-footer-widget px-footer-col-1 px-fade-anim"
-                data-delay=".3"
-              >
-                <h4 className="m-0 font-thunder text-[clamp(40px,5vw,80px)] font-bold uppercase leading-none text-white whitespace-pre-line">
-                  {tagline}
-                </h4>
-                <div className="px-footer-widget-social mt-6 flex gap-2">
-                  {socials.map((s) => (
-                    <a
-                      key={s.label}
-                      href={s.href}
-                      className="inline-grid h-[42px] w-[42px] place-items-center rounded-full bg-white/10 text-white transition-[background,color] duration-300 hover:bg-px-red hover:text-white"
-                      style={{ marginRight: 5 }}
-                      aria-label={s.label}
-                    >
-                      <span>{s.icon}</span>
-                    </a>
-                  ))}
-                </div>
-              </div>
+      <div className="py-6 md:py-10 px-4 md:justify-between md:flex ">
+        <div className="w-full pb-10 md:w-1/2">
+          <div
+            className="px-footer-widget px-footer-col-1 px-fade-anim"
+            data-delay=".3"
+          >
+            <h4 className="m-0 font-thunder text-[clamp(40px,5vw,80px)] font-bold uppercase leading-none text-white whitespace-pre-line">
+              {tagline}
+            </h4>
+            <div className="px-footer-widget-social mt-6 flex gap-2">
+              {socials.map((s) => (
+                <a
+                  key={s.label}
+                  href={s.href}
+                  className="inline-grid h-[42px] w-[42px] place-items-center rounded-full bg-white/10 text-white transition-[background,color] duration-300 hover:bg-px-red hover:text-white"
+                  style={{ marginRight: 5 }}
+                  aria-label={s.label}
+                >
+                  <span>{s.icon}</span>
+                </a>
+              ))}
             </div>
+          </div>
+        </div>
 
-            <div className="w-full pb-10 md:w-1/2 lg:w-1/3 xl:w-5/12">
-              <div
-                className="px-footer-widget px-footer-col-2 px-fade-anim"
-                data-delay=".5"
-              >
-                <h4 className="mb-6 m-0 text-lg font-semibold tracking-[0.02em] text-white">{chrome.footerQuickLinksTitle}</h4>
-                <div className="[&_ul]:m-0 [&_ul]:flex [&_ul]:list-none [&_ul]:flex-wrap [&_ul]:gap-2.5 [&_ul]:p-0 [&_li]:list-none [&_a]:inline-block [&_a]:rounded-[20px] [&_a]:bg-white/10 [&_a]:px-5 [&_a]:py-[13px] [&_a]:text-sm [&_a]:font-medium [&_a]:uppercase [&_a]:leading-none [&_a]:text-white [&_a]:transition-[background,color] [&_a]:duration-300 hover:[&_a]:bg-px-red">
-                  <ul>
-                    {quickLinks.map((l) => (
-                      <li key={`${l.href}-${l.label}`} style={{ marginRight: 5 }}>
-                        <Link href={localizedPath(l.href, locale, defaultLocale)}>{l.label}</Link>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-                <div className="mt-4">
-                  <LanguageSwitcher
-                    locale={locale}
-                    locales={locales}
-                    defaultLocale={defaultLocale}
-                    variant="footer"
-                    label={chrome.languageLabel}
-                  />
-                </div>
-              </div>
+        <div className="w-full md:w-1/2 items-end justify-end">
+          <div className="px-footer-widget px-footer-col-3 mb-8 px-fade-anim" data-delay=".7">
+            <h4 className="mb-5 m-0 text-lg font-semibold tracking-[0.02em] text-white">{chrome.footerContactTitle}</h4>
+            <div className="flex flex-col gap-2 [&_a]:text-base [&_a]:text-white [&_a]:transition-colors [&_a]:duration-300 hover:[&_a]:text-px-red">
+              <a href={`mailto:${email}`}>{email}</a>
+              <a href={`tel:${phone.replace(/[^\d+]/g, "")}`}>{phone}</a>
             </div>
-
-            <div className="w-full pb-10 md:w-1/2 lg:w-1/3 xl:w-1/4">
-              <div
-                className="px-footer-widget px-footer-col-3 mb-8 px-fade-anim"
-                data-delay=".7"
+            <div className="mt-4 [&_a]:text-[15px] [&_a]:leading-[1.6] [&_a]:text-white/85 hover:[&_a]:text-white">
+              <a
+                target="_blank"
+                rel="noreferrer"
+                href={chrome.footerMapsUrl || "https://www.google.com/maps/"}
+                className="whitespace-pre-line"
               >
-                <h4 className="mb-5 m-0 text-lg font-semibold tracking-[0.02em] text-white">{chrome.footerContactTitle}</h4>
-                <div className="flex flex-col gap-2 [&_a]:text-base [&_a]:text-white [&_a]:transition-colors [&_a]:duration-300 hover:[&_a]:text-px-red">
-                  <a href={`mailto:${email}`}>{email}</a>
-                  <a href={`tel:${phone.replace(/[^\d+]/g, "")}`}>{phone}</a>
-                </div>
-                <div className="mt-4 [&_a]:text-[15px] [&_a]:leading-[1.6] [&_a]:text-white/85 hover:[&_a]:text-white">
-                  <a
-                    target="_blank"
-                    rel="noreferrer"
-                    href={chrome.footerMapsUrl || "https://www.google.com/maps/"}
-                    className="whitespace-pre-line"
-                  >
-                    {address}
-                  </a>
-                </div>
-              </div>
+                {address}
+              </a>
             </div>
           </div>
         </div>
       </div>
 
-      <div className="px-copyright-area">
-        <div className="w-full px-16">
-          <div className="px-copyright-content overflow-hidden text-center">
-            <h2 className="font-thunder text-[clamp(64px,18vw,280px)] font-bold uppercase leading-[0.85] tracking-[0.04em] text-px-red">
-              {chrome.copyrightName}
-            </h2>
-          </div>
-        </div>
+      <div className="w-full px-4">
+        <h2 className="font-thunder text-[90px] md:text-[148px] lg:text-[252px] font-bold uppercase lg:tracking-[0.3em] md:tracking-wider text-px-red">
+            {chrome.copyrightName}
+        </h2>
       </div>
     </footer>
   );

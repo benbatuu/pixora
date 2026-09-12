@@ -17,8 +17,8 @@ export default function Projects({ projects, limit }: ProjectsProps) {
   const items = typeof limit === "number" ? projects.slice(0, limit) : projects;
 
   return (
-    <section id="projects" ref={sectionRef} className="px-portfolio-area pt-[75px] pb-[40px]">
-      <div className="w-full px-16">
+    <section id="projects" ref={sectionRef} className="px-portfolio-area py-6 md:py-10 px-4 ">
+      <div className="w-full">
         <div className="px-portfolio-wrap">
           {items.map((p, i) => (
             <div

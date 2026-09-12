@@ -51,7 +51,7 @@ export default async function HomePage() {
         subtitle={content.services.header.subtitle}
         heading={content.services.header.heading}
       />
-      <section className="w-full px-16 pb-4 pt-2">
+      <section className="w-full py-2 md:py-10 px-4 ">
         <div className="flex flex-wrap items-end justify-between gap-4">
           <h2 className="font-thunder text-[clamp(40px,7vw,96px)] leading-none text-[var(--px-black)]">
             {content.featured.title}

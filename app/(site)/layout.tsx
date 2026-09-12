@@ -30,7 +30,7 @@ export default async function SiteLayout({
   ]);
 
   return (
-    <main className="bg-[var(--px-bg)]">
+    <main className="bg-(--px-bg)">
       <JsonLd settings={settings} />
       <SiteChrome
         navItems={navItems}

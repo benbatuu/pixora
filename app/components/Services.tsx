@@ -28,8 +28,8 @@ export default function Services({
   useFadeAnim(sectionRef);
 
   return (
-    <section id="services" ref={sectionRef} className="px-service-2-area pb-[75px]">
-      <div className="w-full px-16">
+    <section id="services" ref={sectionRef} className="px-service-2-area py-6 md:py-10 px-4 items-center">
+      <div className="w-full">
         <div className="px-service-2-top mb-[50px] px-fade-anim" data-delay=".2">
           <div className="flex flex-wrap items-end justify-between gap-4">
             <div className="px-service-2-subtitle-box">

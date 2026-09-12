@@ -70,35 +70,31 @@ export default function About({
   }, []);
 
   return (
-    <section
-      id="about"
-      ref={sectionRef}
-      className="px-about-2-area pt-[160px] pb-[110px]"
-    >
-      <div className="w-full px-16">
-        <div className="flex flex-wrap items-end">
+    <section id="about" ref={sectionRef} className="px-about-2-area py-6 md:py-10 px-4 items-center">
+      <div className="w-full">
+        <div className="flex flex-wrap items-center">
           <div className="w-full xl:w-3/4">
-            <div
-              className="px-about-2-title-box relative px-fade-anim"
-              data-delay=".2"
-            >
+            <div className="px-about-2-title-box relative px-fade-anim" data-delay=".2">
               <h3 className="m-0 font-thunder font-bold uppercase leading-[0.85] tracking-[-0.02em] text-px-black [&_>b.text-effect:first-child]:inline-block [&_>b.text-effect:first-child]:text-[clamp(64px,18vw,350px)]">
                 <b className="text-effect">{line1Bold}</b>{" "}
                 <i className="inline-block align-baseline font-thunder text-[clamp(40px,5vw,80px)] not-italic text-px-red">{line1Accent}</i>
                 <br />
-                <em className="text-effect inline-flex items-center gap-[clamp(12px,2vw,28px)] text-[clamp(100px,16vw,350px)] not-italic text-px-red">
+                <em className="text-effect inline-block items-center gap-[clamp(12px,2vw,28px)] text-9xl md:text-[128px] lg:text-[256px] not-italic text-px-red">
                   <Image
                     src={gifUrl}
                     alt="gif image"
                     width={640}
                     height={360}
-                    className="inline-block h-auto w-[clamp(100px,14vw,280px)] -mx-[42px]"
+                    className="inline-block h-auto w-[640px] lg:w-[480px] lg:-mx-[42px]"
                     unoptimized
                   />
                   {designLabel}
+                  <b className="text-effect text-black relative text-9xl md:text-[128px] lg:[256px] hidden md:inline-block lg:hidden md:px-4">
+                  {studioLabel}
+                </b>
                 </em>
                 <br />
-                <b className="text-effect relative inline-block text-[clamp(70px,10vw,200px)]">
+                <b className="text-effect relative inline-block lg:inline-block text-9xl md:text-[256px] lg:[256px] md:hidden">
                   {studioLabel}
                   <span />
                 </b>
@@ -111,7 +107,7 @@ export default function About({
               data-delay=".4"
             >
               <Link
-                className="relative mb-[90px] inline-grid h-[120px] w-[120px] place-items-center text-center font-thunder text-base leading-[1.15] text-white"
+                className="relative mb-2 lg:mb-[90px] inline-grid h-[120px] w-[120px] place-items-center text-center font-thunder text-base leading-[1.15] text-white"
                 href={aboutCtaHref}
               >
                 <span className="text-xl relative z-10 text-white font-bold whitespace-pre-line">
@@ -121,7 +117,7 @@ export default function About({
                   <ZikzakBg />
                 </i>
               </Link>
-              <span className="text-effect mt-6 block font-thunder text-[clamp(48px,8vw,160px)] font-bold uppercase leading-[0.9] tracking-[-0.04em] text-px-black whitespace-pre-line">
+              <span className="text-effect mt-0 md:mt-6 block font-thunder text-[clamp(48px,8vw,160px)] font-bold uppercase leading-[0.9] text-px-black whitespace-nowrap lg:whitespace-pre-line">
                 {fromLabel}
               </span>
             </div>

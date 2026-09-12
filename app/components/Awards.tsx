@@ -36,9 +36,9 @@ export default function Awards({
     <section
       id="awards"
       ref={sectionRef}
-      className="px-award-2-area px-award-style-2 pt-[120px] pb-[130px]"
+      className="px-award-2-area px-award-style-2 py-6 md:py-10 px-4 "
     >
-      <div className="w-full px-16">
+      <div className="w-full">
         <div className="px-award-title-wrap mb-[35px] px-fade-anim" data-delay=".2">
           <div className="flex flex-wrap items-end gap-y-6">
             <div className="w-full xl:w-1/4">
