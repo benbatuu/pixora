@@ -257,7 +257,7 @@ export default function Header({
             open ? "pointer-events-auto" : "pointer-events-none"
           }`}
         >
-          <div className={`grid h-full max-h-[calc(100vh-140px)] grid-cols-1 items-start gap-8 min-[992px]:grid-cols-2 min-[992px]:items-center min-[992px]:gap-12 ${open ? "p-5 md:p-8" : "p-0"}`}>
+          <div className={`grid h-full max-h-[calc(100vh-140px)] grid-cols-1 items-start gap-8 min-[992px]:grid-cols-2 min-[992px]:items-center min-[992px]:gap-12 ${open ? "p-6 md:p-8" : "p-0"}`}>
             {/* Nav links (was .px-offcanvas-2-left) */}
             <div
               className={`transition-[opacity,transform] duration-700 ease-[cubic-bezier(0.2,0.8,0.2,1)] ${
@@ -276,7 +276,7 @@ export default function Header({
                             href={href}
                             aria-current={active ? "page" : undefined}
                             onClick={() => setOpen(false)}
-                            className={`font-thunder text-[clamp(64px,9vw,120px)] font-bold uppercase leading-[0.82] tracking-[0.06em] ${
+                            className={`font-thunder text-[clamp(42px,9vw,120px)] font-bold uppercase leading-[0.82] tracking-[0.09em] ${
                               active ? "text-px-red" : "text-white"
                             }`}
                           >
