@@ -191,12 +191,12 @@ export default function ServicesPageContent({
     <div className="px-services-page bg-white text-[var(--px-black)]">
       {/* 1. Hero — cream #FFF5F3 */}
       <section
-        className="px-inner-service-2-ptb pt-[160px] pb-10 md:pt-[200px] md:pb-20"
+        className="px-inner-service-2-ptb pt-[120px] md:pt-[160px] pb-10 md:pt-[200px] md:pb-20"
         style={{ backgroundColor: "#FFF5F3" }}
       >
-        <div className="w-full px-16">
+        <div className="w-full px-4">
           <div className="grid grid-cols-1 items-end gap-10 xl:grid-cols-12">
-            <div className="xl:col-span-10">
+            <div className="xl:col-span-8">
               <div className="px-inner-service-2-heading">
                 <h1 className="px-inner-service-2-title m-0 font-['Thunder',Impact,sans-serif] text-[clamp(96px,16vw,300px)] font-bold uppercase leading-[0.8] tracking-[-0.02em] text-px-black [&_br]:hidden lg:[&_br]:block [&_span]:text-[#e11010] whitespace-pre-line">
                   {hero.titleLine1}{" "}
@@ -204,15 +204,15 @@ export default function ServicesPageContent({
                 </h1>
               </div>
             </div>
-            <div className="xl:col-span-2">
-              <div className="px-hero-4-video-wrap flex justify-end">
-                <div className="px-hero-4-video [&_video]:ml-auto [&_video]:block [&_video]:h-[195px] [&_video]:w-full [&_video]:max-w-[300px] [&_video]:object-cover">
+            <div className="xl:col-span-4 my-auto">
+              <div className="flex justify-center md:justify-end">
+                <div className="[&_video]:ml-auto [&_video]:block [&_video]:h-[512px] md:[&_video]:w-[1024px] md:[&_video]:max-w-[512px] [&_video]:object-cover">
                   <div className="mb-5 hidden text-end xl:block">
                     <Image
                       src={hero.shapeUrl || "/assets/img/shape/shape-1.png"}
                       alt="shape"
-                      width={171}
-                      height={60}
+                      width={1024}
+                      height={512}
                       className="ml-auto h-auto w-auto"
                     />
                   </div>
@@ -264,7 +264,7 @@ export default function ServicesPageContent({
         ref={introRef}
         className="px-about-4-area px-about-5-style px-inner-service-2-style pt-20 pb-14 md:pt-[120px] md:pb-[70px]"
       >
-        <div className="w-full px-16">
+        <div className="w-full px-4">
           <div className="mb-10 grid grid-cols-1 xl:grid-cols-12 md:mb-[55px]">
             <div className="xl:col-span-10">
               <h2 className="px-section-title ff-inter px-fade-anim m-0 font-[Inter,system-ui,sans-serif] text-[clamp(28px,3.2vw,50px)] font-medium uppercase leading-[1.1] tracking-normal text-px-black whitespace-pre-line">
@@ -299,8 +299,8 @@ export default function ServicesPageContent({
 
       {/* 4. Service cards */}
       <section ref={cardsRef} className="px-service-5-area pb-10 md:pb-16">
-        <div className="w-full px-16">
-          <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 xl:grid-cols-4">
+        <div className="w-full px-4">
+          <div className="grid grid-cols-2 gap-3 md:grid-cols-2 xl:grid-cols-4">
             {SERVICE_CARDS.map((c) => (
               <article key={c.title} className="px-service-5-item mb-6 flex h-full flex-col border border-[#1e1e1e1a] px-8 py-10 px-fade-anim">
                 <div className="px-service-5-icon mb-12">
@@ -330,7 +330,7 @@ export default function ServicesPageContent({
 
       {/* 5. Capsule scatter */}
       <section className="px-capsule-area pb-10">
-        <div className="w-full px-16">
+        <div className="w-full px-4">
           <div className="px-capsule-inner relative overflow-hidden rounded-[20px] border border-[#1e1e1e1a] bg-[#f6f6f6]">
             <div className="px-capsule-top-wrapper p-relative">
               <div className="px-capsule-title-wrapper relative z-[2] px-6 pt-12 lg:pt-[60px] lg:pl-[60px] lg:pr-0">
@@ -354,7 +354,7 @@ export default function ServicesPageContent({
 
       {/* 6. Testimonials */}
       <section className="ar-testimonial-area pt-20 pb-20 md:pt-[120px] md:pb-[120px]">
-        <div className="w-full px-16">
+        <div className="w-full px-4">
           <div className="mx-auto grid grid-cols-1 justify-items-center xl:grid-cols-12">
             <div className="w-full xl:col-span-8 xl:col-start-3">
               <div className="ar-testimonial-slider-wrap relative px-0 pb-[72px] md:px-[72px]">
@@ -424,9 +424,9 @@ export default function ServicesPageContent({
       </section>
 
       {/* 7. Brands */}
-      <section className="px-brand-area px-brand-style-5 pt-10 pb-20 md:pt-[120px] md:pb-[120px]">
-        <div className="w-full px-16">
-          <div className="grid grid-cols-2 gap-0 sm:grid-cols-3 xl:grid-cols-6">
+      <section className="px-brand-area px-brand-style-5 pt-5 pb-20 md:pt-[120px] md:pb-[120px]">
+        <div className="w-full px-4">
+          <div className="grid grid-cols-3 gap-0 sm:grid-cols-3 xl:grid-cols-6">
             {BRANDS.map((src, i) => (
               <div key={src} className="px-brand-item grid min-h-[140px] w-full place-content-center border border-[#ececec] p-5 text-center">
                 <Image
@@ -519,7 +519,7 @@ export default function ServicesPageContent({
 
       {/* 9. FAQ */}
       <section className="px-inner-service-2-faq-ptb pt-10 pb-24 md:pt-[100px] md:pb-[140px]">
-        <div className="w-full px-16">
+        <div className="w-full px-4">
           <div className="grid grid-cols-1 gap-10 lg:grid-cols-12">
             <div className="lg:col-span-5 xl:col-span-6">
               <div className="px-inner-service-2-heading mb-10">
@@ -529,7 +529,7 @@ export default function ServicesPageContent({
                 </h3>
               </div>
             </div>
-            <div className="lg:col-span-7 xl:col-span-6">
+            <div className="col-span-1 lg:col-span-7 xl:col-span-6">
               <div className="px-inner-service-2-faq">
                 <div className="px-service-accordion-wrap">
                   <div className="accordion" id="serviceFaqAccordion">
@@ -584,10 +584,10 @@ export default function ServicesPageContent({
           </svg>
         </span>
         <div className="px-social-bg" style={{ backgroundColor: "#e11010" }}>
-          <div className="w-full px-16">
+          <div className="w-full px-4">
             <div className="grid grid-cols-1 items-center gap-6 py-[19px] md:grid-cols-2">
-              <div className="px-social-mail [&_a]:inline-flex [&_a]:items-center [&_a]:text-[clamp(18px,2vw,26px)] [&_a]:font-semibold [&_a]:leading-none [&_a]:tracking-[-0.02em] [&_a]:text-white [&_a]:no-underline [&_a_span]:mr-2.5 [&_a_span]:inline-flex">
-                <a className="px-line-lr text-white" href="mailto:hello@getpixoria.com">
+              <div className="px-social-mail mx-auto [&_a]:inline-flex [&_a]:items-center [&_a]:text-[clamp(18px,2vw,26px)] [&_a]:font-semibold [&_a]:leading-none [&_a]:tracking-[-0.02em] [&_a]:text-white [&_a]:no-underline [&_a_span]:mr-2.5 [&_a_span]:inline-flex">
+                <a className="text-white" href="mailto:hello@getpixoria.com">
                   <span>
                     <MailIcon />
                   </span>

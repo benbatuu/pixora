@@ -137,21 +137,17 @@ export default function ContactPageContent({
 
   const fieldCls =
     "mb-5 w-full resize-none rounded-none border-0 border-b border-[rgba(30,30,30,0.2)] bg-transparent py-3.5 text-lg text-[#1e1e1e] outline-none focus:border-[#e11010] placeholder:text-base placeholder:uppercase placeholder:tracking-[-0.8px] placeholder:text-[rgba(30,30,30,0.4)]";
-
-  const contactTitle =
-    "m-0 p-0 font-['Thunder',sans-serif] text-[86px] font-bold tracking-[0.04em] uppercase text-[#1e1e1e] min-[576px]:text-[120px] md:text-[180px] lg:text-[230px] xl:text-[300px] min-[1400px]:text-[350px] min-[1600px]:text-[400px] min-[1701px]:text-[450px] min-[1891px]:text-[480px]";
+    
   return (
     <div ref={rootRef} className="bg-white text-px-black">
-      <section className="py-16">
-        <div className="w-full px-16">
-          <div className="px-fade-anim text-center" data-delay="0">
-            <h4 className={contactTitle}>{title}</h4>
+      <section className="pt-20">
+        <div className="text-center" data-delay="0">
+            <h3 className="font-thunder font-bold uppercase text-[#1e1e1e] text-8xl md:text-[232px] lg:text-[480px]">{title}</h3>
           </div>
-        </div>
       </section>
 
       <section className="pb-16 md:pb-20">
-        <div className="w-full px-16">
+        <div className="w-full px-4">
           <div className="grid grid-cols-1 items-start gap-12 lg:grid-cols-12 lg:gap-10">
             <div className="px-fade-anim pb-[50px] lg:col-span-4" data-delay="0.08">
               <div>
@@ -162,7 +158,7 @@ export default function ContactPageContent({
                     </span>
                     {item.email ? (
                       <a
-                        className={`${lineHover} text-lg font-normal tracking-[-0.8px] text-[#1e1e1e] no-underline leading-[1.45]`}
+                        className={`${lineHover} text-lg font-normal text-[#1e1e1e] no-underline leading-[1.45]`}
                         href={`mailto:${item.email}`}
                       >
                         {item.email}
@@ -170,7 +166,7 @@ export default function ContactPageContent({
                     ) : null}
                     {item.lines?.length ? (
                       <a
-                        className={`${lineHover} text-lg font-normal tracking-[-0.8px] text-[#1e1e1e] no-underline leading-[1.45]`}
+                        className={`${lineHover} text-lg font-normal text-[#1e1e1e] no-underline leading-[1.45]`}
                         href={item.phone ? `tel:${item.phone}` : "#"}
                       >
                         {item.lines.map((line) => (
@@ -183,7 +179,7 @@ export default function ContactPageContent({
                     ) : null}
                     {item.phone && !item.lines?.length ? (
                       <a
-                        className={`${lineHover} text-lg font-normal tracking-[-0.8px] text-[#1e1e1e] no-underline leading-[1.45]`}
+                        className={`${lineHover} text-lg font-normal text-[#1e1e1e] no-underline leading-[1.45]`}
                         href={`tel:${item.phone}`}
                       >
                         {item.phone}
@@ -296,7 +292,7 @@ export default function ContactPageContent({
                     </div>
                     <div>
                       <button
-                        className="group w-full cursor-pointer rounded-2xl border-0 bg-[#e11010] px-[54px] pt-6 pb-[13px] font-['Thunder',Impact,sans-serif] text-[clamp(30px,4vw,40px)] uppercase leading-none tracking-[0.08em] text-white transition-colors duration-300 hover:bg-[#0a0a0a] disabled:opacity-60"
+                        className="group w-full cursor-pointer rounded-2xl border-0 bg-[#e11010] px-[54px] pt-6 pb-[13px] font-['Thunder',Impact,sans-serif] text-[clamp(30px,4vw,40px)] uppercase leading-none text-white transition-colors duration-300 hover:bg-[#0a0a0a] disabled:opacity-60"
                         type="submit"
                         disabled={submitting}
                         aria-label={form.submitLabel}
@@ -320,9 +316,9 @@ export default function ContactPageContent({
       </section>
 
       <section className="bg-[#F7F7F7] pt-20 pb-[90px] lg:pt-[120px] lg:pb-[130px]">
-        <div className="w-full px-16">
+        <div className="w-full px-4">
           <div className="px-fade-anim mb-5" data-delay="0.05">
-            <h2 className="m-0 font-['Thunder',Impact,sans-serif] text-[clamp(55px,10vw,140px)] font-semibold uppercase leading-none tracking-[-0.03em] text-[#1e1e1e]">
+            <h2 className="m-0 font-['Thunder',Impact,sans-serif] text-[clamp(55px,10vw,140px)] font-semibold uppercase leading-none text-[#1e1e1e]">
               {officesHeading}
             </h2>
           </div>
@@ -335,14 +331,14 @@ export default function ContactPageContent({
               >
                 <div className="grid grid-cols-1 items-center gap-4 sm:grid-cols-2 lg:grid-cols-12 lg:gap-6">
                   <div className="lg:col-span-4">
-                    <span className="inline-block text-[clamp(28px,3vw,44px)] font-semibold leading-none tracking-[-1.32px] text-[#1e1e1e]">
+                    <span className="inline-block text-[clamp(28px,3vw,44px)] font-semibold leading-none  text-[#1e1e1e]">
                       {o.city}
                     </span>
                   </div>
                   <div className="lg:col-span-3">
                     <div>
                       <a
-                        className={`${lineHover} text-base font-medium tracking-[-0.4px] text-[#686868] no-underline leading-normal hover:text-[#0a0a0a]`}
+                        className={`${lineHover} text-base font-medium text-[#686868] no-underline leading-normal hover:text-[#0a0a0a]`}
                         href="#"
                       >
                         {o.lines.map((line) => (
@@ -357,14 +353,14 @@ export default function ContactPageContent({
                   <div className="lg:col-span-3">
                     <div>
                       <a
-                        className={`${lineHover} text-base font-medium tracking-[-0.4px] text-[#686868] no-underline leading-normal hover:text-[#0a0a0a]`}
+                        className={`${lineHover} text-base font-medium text-[#686868] no-underline leading-normal hover:text-[#0a0a0a]`}
                         href={`tel:${o.phone}`}
                       >
                         {o.phone}
                       </a>
                       <br />
                       <a
-                        className={`${lineHover} text-base font-medium tracking-[-0.4px] text-[#686868] no-underline leading-normal hover:text-[#0a0a0a]`}
+                        className={`${lineHover} text-base font-medium text-[#686868] no-underline leading-normal hover:text-[#0a0a0a]`}
                         href={`mailto:${o.email}`}
                       >
                         {o.email}
@@ -374,7 +370,7 @@ export default function ContactPageContent({
                   <div className="lg:col-span-2 lg:text-right">
                     <a
                       href="#"
-                      className="inline-block rounded-[60px] border border-[#e5e5e5] px-[35px] py-[11px] text-base font-medium tracking-[-0.6px] text-[#686868] no-underline transition-all duration-300 hover:border-transparent hover:bg-[#e11010] hover:text-white"
+                      className="inline-block rounded-[60px] border border-[#e5e5e5] px-[35px] py-[11px] text-base font-medium  text-[#686868] no-underline transition-all duration-300 hover:border-transparent hover:bg-[#e11010] hover:text-white"
                     >
                       {messages.directionsLabel}
                     </a>

@@ -54,7 +54,7 @@ export default function ProjectDetailContent({
       className="bg-white text-px-black"
     >
       <section className="pt-[140px] pb-8 md:pt-[180px] md:pb-12">
-        <div className="w-full px-16" ref={introRef}>
+        <div className="w-full px-4" ref={introRef}>
           <div className="px-pd-intro-item flex flex-wrap items-center gap-3">
             <Link
               href="/projects"
@@ -68,7 +68,7 @@ export default function ProjectDetailContent({
             </span>
           </div>
 
-          <h1 className="px-pd-intro-item mt-8 font-['Thunder',Impact,sans-serif] text-[clamp(56px,12vw,160px)] font-semibold uppercase leading-[0.85] tracking-[-0.03em] text-px-black md:mt-12">
+          <h1 className="px-pd-intro-item mt-8 font-['Thunder',Impact,sans-serif] text-[clamp(56px,12vw,160px)] font-semibold uppercase leading-[0.85] text-px-black md:mt-12">
             {project.title}
           </h1>
 
@@ -86,7 +86,7 @@ export default function ProjectDetailContent({
       </section>
 
       <section className="pb-12 md:pb-16">
-        <div className="w-full px-16">
+        <div className="w-full px-4">
           <div className={`${frameBase} aspect-[16/9] max-md:aspect-[4/3]`}>
             <Image
               src={project.image}
@@ -101,7 +101,7 @@ export default function ProjectDetailContent({
       </section>
 
       <section className="border-y border-black/10 py-10 md:py-12">
-        <div className="w-full px-16">
+        <div className="w-full px-4">
           <div
             className="px-fade-anim grid grid-cols-2 gap-8 md:grid-cols-5 md:items-end"
             data-delay="0.05"
@@ -115,7 +115,7 @@ export default function ProjectDetailContent({
               ] as const
             ).map(([label, value]) => (
               <div key={label}>
-                <p className="text-[11px] font-medium uppercase tracking-[0.14em] text-px-body">
+                <p className="text-[11px] font-medium uppercase text-px-body">
                   {label}
                 </p>
                 <p className="mt-2 text-base font-medium leading-snug md:text-lg">
@@ -123,7 +123,7 @@ export default function ProjectDetailContent({
                 </p>
               </div>
             ))}
-            <div className="col-span-2 md:col-span-1 md:flex md:justify-end">
+            <div className="col-span-1 md:col-span-1 md:flex md:justify-end">
               <a
                 href={project.siteUrl}
                 className="inline-flex min-h-[48px] items-center justify-center rounded-full bg-px-black px-7 text-xs font-semibold uppercase tracking-[0.12em] text-white transition hover:bg-px-red"
@@ -136,7 +136,7 @@ export default function ProjectDetailContent({
       </section>
 
       <section className="py-16 md:py-24">
-        <div className="w-full px-16">
+        <div className="w-full px-4">
           <div className="grid grid-cols-1 gap-12 lg:grid-cols-12 lg:gap-16">
             <div className="px-fade-anim lg:col-span-6" data-delay="0.05">
               <span className="text-[11px] font-medium uppercase tracking-[0.14em] text-px-red">
@@ -170,7 +170,7 @@ export default function ProjectDetailContent({
       </section>
 
       <section className="pb-16 md:pb-24">
-        <div className="w-full px-16">
+        <div className="w-full px-4">
           {gallery[0] && (
             <div className={`${frameBase} mb-5 aspect-[21/9] max-md:aspect-[16/10] md:mb-6`}>
               <Image
@@ -205,7 +205,7 @@ export default function ProjectDetailContent({
       </section>
 
       <section className="bg-[#F7F7F7] py-16 md:py-24">
-        <div className="w-full px-16">
+        <div className="w-full px-4">
           <div className="px-fade-anim w-full text-center" data-delay="0.05">
             <span className="text-[11px] font-medium uppercase tracking-[0.14em] text-px-red">
               Results

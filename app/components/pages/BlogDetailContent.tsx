@@ -59,9 +59,9 @@ export default function BlogDetailContent({
 
   return (
     <div className="bg-white text-[var(--px-black)]">
-      <section className="pt-[140px] pb-8 md:pt-[160px]">
-        <div className="w-full px-16">
-          <div className="relative aspect-[4/3] w-full overflow-hidden rounded-2xl bg-[#f2f2f2] md:aspect-[2/1]">
+      <section className="pt-[80px] pb-8 md:pt-[160px]">
+        <div className="w-full">
+          <div className="relative aspect-[4/3] w-full overflow-hidden bg-[#f2f2f2] md:aspect-[2/1]">
             <Image
               src={cover}
               alt={post.title}
@@ -75,7 +75,7 @@ export default function BlogDetailContent({
       </section>
 
       <section className="pb-6">
-        <div className="w-full px-16">
+        <div className="w-full px-4">
           <div className="flex flex-wrap items-center justify-center gap-4 text-sm text-[var(--px-body)] md:gap-6">
             <div className="flex items-center gap-3">
               <div className="relative h-10 w-10 overflow-hidden rounded-full">
@@ -104,7 +104,7 @@ export default function BlogDetailContent({
       </section>
 
       <section className="pb-[100px] pt-8">
-        <div className="w-full px-16">
+        <div className="w-full px-4">
           <div className="grid grid-cols-1 gap-12 lg:grid-cols-12">
             <article className="lg:col-span-8">
               {body ? (

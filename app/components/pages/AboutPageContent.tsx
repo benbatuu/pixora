@@ -14,6 +14,7 @@ import {
 } from "@/app/data/about";
 import type { UiMessages } from "@/lib/i18n/ui";
 import { getUi } from "@/lib/i18n/ui";
+import Awards from "../Awards";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -88,15 +89,17 @@ export default function AboutPageContent({
   }, []);
 
   return (
-    <div className="bg-white text-px-black">
+    <div className="bg-white text-px-black px-4">
       {/* 1. Hero */}
-      <section className="border-b border-[#1e1e1e0f] pt-[calc(120px+48px)] pb-[150px] max-lg:pt-[120px] max-lg:pb-[90px]">
+      <section className="border-b border-[#1e1e1e0f] pt-[80px] md:pt-[calc(120px+48px)] pb-[150px] max-lg:pt-[120px] max-lg:pb-[90px]">
         <div className="w-full mx-auto">
           <div className="text-center">
-            <h2 className="mb-[50px] mt-0 font-thunder text-[56px] font-semibold uppercase leading-none tracking-[1px] text-[#e11010] min-[576px]:text-[72px] md:mb-[50px] md:text-[140px] lg:text-[200px] xl:text-[260px] min-[1400px]:text-[315px] min-[1600px]:text-[350px] min-[1800px]:text-[410px] max-md:mb-7">{hero.title}</h2>
+            <h2 className="mb-12.5 mt-0 font-thunder text-7xl md:text-[172px] lg:text-[376px] font-semibold uppercase tracking-[0.09em] text-px-red">
+              {hero.title}
+            </h2>
           </div>
         </div>
-        <div className="w-full px-16">
+        <div className="w-full">
           <div className="grid grid-cols-1 gap-8 xl:grid-cols-12 xl:gap-6">
             <div className="xl:col-span-5">
               <span className="inline-block text-base font-medium tracking-[-0.03em] text-px-black">{hero.label}</span>
@@ -153,7 +156,7 @@ export default function AboutPageContent({
 
       {/* 3. Lead + video + copy */}
       <section className="pt-[100px] pb-20 xl:pt-[120px]">
-        <div className="w-full px-16">
+        <div className="w-full px4">
           <div className="mb-[70px] w-full">
             <div className="[&_p]:mb-0 [&_p]:font-thunder [&_p]:text-[36px] [&_p]:font-semibold [&_p]:uppercase [&_p]:leading-none [&_p]:tracking-[-1px] [&_p]:text-px-black min-[576px]:[&_p]:text-[54px] lg:[&_p]:text-[75px] xl:[&_p]:text-[85px] min-[1600px]:[&_p]:text-[100px] [&_p_span]:text-[#e11010]">
               <p>
@@ -177,9 +180,8 @@ export default function AboutPageContent({
                 </video>
               </div>
             </div>
-            <div className="xl:col-span-5 xl:col-start-8">
-              <div className="">
-                <p className="mb-5 font-[var(--font-inter),Inter,system-ui,sans-serif] text-[30px] font-semibold leading-[40px] tracking-[-1.2px] text-px-black">
+            <div className="xl:col-span-5 xl:col-start-8 my-auto">
+              <p className="mb-5 font-[var(--font-inter),Inter,system-ui,sans-serif] text-[30px] font-semibold leading-[40px] tracking-[-1.2px] text-px-black">
                   {hero.approachTitle}
                 </p>
                 <p className="mb-10 text-lg font-normal leading-7 tracking-[-0.36px] text-[#5d5d5d]">
@@ -188,7 +190,6 @@ export default function AboutPageContent({
                 <Link className="inline-block rounded-[50px] bg-px-black px-9 py-[17px] text-[15px] font-semibold uppercase leading-none tracking-[-0.6px] text-white transition-[background] duration-300 hover:bg-[#e11010] hover:text-white" href={hero.portfolioHref}>
                   {hero.portfolioLabel}
                 </Link>
-              </div>
             </div>
           </div>
         </div>
@@ -196,8 +197,8 @@ export default function AboutPageContent({
 
       {/* 4. Funfacts — 4 across */}
       <section className="pb-[50px]">
-        <div className="w-full px-16">
-          <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 xl:grid-cols-4">
+        <div className="w-full">
+          <div className="grid grid-cols-2 gap-5 sm:grid-cols-2 xl:grid-cols-4">
             {STATS.map((s) => (
               <div key={s.label} className="h-full border border-[#1e1e1e0f] px-[45px] pt-[45px] pb-[35px] shadow-[-1px_0_#e11010] max-lg:p-[30px] [&_h4]:mb-0 [&_h4]:font-thunder [&_h4]:text-[70px] [&_h4]:font-semibold [&_h4]:uppercase [&_h4]:leading-[0.76] [&_h4]:text-px-black xl:[&_h4]:text-[100px] [&_h4_i]:not-italic [&_span]:mt-3 [&_span]:block [&_span]:text-lg [&_span]:font-normal [&_span]:capitalize [&_span]:leading-none [&_span]:tracking-[-0.36px] [&_span]:text-[#5d5d5d]">
                 <h4>
@@ -218,7 +219,7 @@ export default function AboutPageContent({
           loop
           slidesPerView="auto"
           spaceBetween={40}
-          speed={14000}
+          speed={16000}
           allowTouchMove={false}
           freeMode={{ enabled: true, momentum: false }}
           autoplay={{
@@ -240,14 +241,14 @@ export default function AboutPageContent({
 
       {/* 6. OUR SOLUTIONS — label left, list right */}
       <section className="pt-20 pb-20">
-        <div className="w-full px-16">
+        <div className="w-full">
           <div className="grid grid-cols-1 gap-10 lg:grid-cols-12">
             <div className="lg:col-span-4">
               <span className="inline-block text-base font-medium tracking-[-0.03em] text-px-black">{hero.solutionsHeading}</span>
             </div>
             <div className="lg:col-span-8">
               <div className="aus-service-content-wrap">
-                <div className="mb-2 grid grid-cols-2 gap-4">
+                <div className="mb-2 grid-cols-2 gap-4 hidden md:grid lg:grid">
                   <label className="pl-20 text-sm font-medium uppercase tracking-wide text-[var(--px-black)]">
                     {hero.solutionsServicesLabel ?? messages.servicesCol}
                   </label>
@@ -276,7 +277,7 @@ export default function AboutPageContent({
 
       {/* 7. Team — 4 square-ish cards in a row */}
       <section className="pt-[130px] pb-10">
-        <div className="w-full px-16">
+        <div className="w-full">
           <div className="mb-[60px] flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
             <h3 className="mb-0 whitespace-pre-line font-thunder text-[48px] font-bold leading-[0.9] tracking-[-0.02em] text-px-black md:text-[72px] xl:text-[100px]">
               {hero.teamTitle ?? hero.teamHeading ?? "Meet the\ntalented team"}
@@ -292,7 +293,7 @@ export default function AboutPageContent({
               </i>
             </Link>
           </div>
-          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 xl:grid-cols-4">
+          <div className="grid grid-cols-2 gap-6 sm:grid-cols-2 xl:grid-cols-4">
             {TEAM.map((m) => (
               <div key={m.name} className="group">
                 <div className="relative">
@@ -320,51 +321,7 @@ export default function AboutPageContent({
       </section>
 
       {/* 8. Awards — title + 4-column rows */}
-      <section className="pt-[140px] pb-[120px]">
-        <div className="w-full px-16">
-          <div className="mb-[50px] grid grid-cols-1 items-center gap-6 xl:grid-cols-12">
-            <div className="xl:col-span-4">
-              <h3 className="inline-block text-base font-medium tracking-[-0.03em] text-px-black">
-                {hero.awardsHeading ?? "Awards"}
-              </h3>
-            </div>
-            <div className="xl:col-span-8">
-              <h3 className="mb-0 whitespace-pre-line font-thunder text-[48px] font-bold leading-[0.9] tracking-[-0.02em] text-px-black md:text-[72px] xl:text-[100px]">
-                {hero.awardsTitle ?? "Awards &\nrecognitions."}
-              </h3>
-            </div>
-          </div>
-          <div className="px-award-wrapper">
-            {AWARDS.map((a) => (
-              <div key={a.index} className="border-b border-black/10 py-6 md:py-8">
-                <div className="grid grid-cols-1 items-center gap-3 md:grid-cols-12 md:gap-4">
-                  <div className="md:col-span-2">
-                    <div className="text-sm text-px-body">
-                      <span>({a.index})</span>
-                    </div>
-                  </div>
-                  <div className="md:col-span-4">
-                    <div className="flex items-center gap-2 text-lg font-medium text-px-black">
-                      <Image src={a.icon} alt="" width={20} height={20} />
-                      <span>{a.name}</span>
-                    </div>
-                  </div>
-                  <div className="md:col-span-4">
-                    <div className="text-base text-px-body">
-                      <span>{a.org}</span>
-                    </div>
-                  </div>
-                  <div className="md:col-span-2 md:text-right">
-                    <div className="text-lg font-semibold text-px-black">
-                      <span>{a.year}</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      <Awards />
     </div>
   );
 }

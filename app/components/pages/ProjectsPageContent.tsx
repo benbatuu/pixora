@@ -25,20 +25,22 @@ export default function ProjectsPageContent({
 
   return (
     <div className="bg-white text-px-black">
-      <section className="pt-[160px] pb-10 md:pt-[200px] md:pb-[70px] lg:pt-[250px] lg:pb-[110px]">
-        <div className="w-full px-16">
+      <section className="pt-[120px] pb-10 md:pt-[200px] md:pb-[70px] lg:pt-[250px] lg:pb-[110px]">
+        <div className="w-full">
           <div className="text-center">
-            <h1 className="m-0 font-['Thunder',Impact,sans-serif] text-[clamp(55px,12vw,200px)] font-bold uppercase leading-[0.8] tracking-[-0.02em] text-px-black">
+            <h1 className="m-0 font-['Thunder',Impact,sans-serif] text-[86px] md:text-[200px] lg:text-[360px] font-bold uppercase leading-[0.8] text-px-black">
               <span className="text-[#e11010]">{messages.projectsEyebrow}</span>{" "}
-              <br className="hidden md:block" />
-              {messages.projectsTitleRest}
+              <br />
+              <span className="text-[64px] md:text-[148px] lg:text-[256px] tracking-[0.02em]">
+                {messages.projectsTitleRest}
+              </span>
             </h1>
           </div>
         </div>
       </section>
 
-      <section ref={listRef} className="pb-16 md:pb-20">
-        <div className="w-full px-16">
+      <section ref={listRef} className="">
+        <div className="w-full px-4">
           <div>
             <div className="mb-8 flex flex-col justify-between gap-4 pb-6 md:mb-10 md:flex-row md:items-center md:pb-10">
               <div>

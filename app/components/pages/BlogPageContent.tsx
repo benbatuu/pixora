@@ -64,10 +64,10 @@ export default function BlogPageContent({
       className="bg-white text-px-black"
     >
       <section className="pt-[150px] pb-5 lg:pt-[200px]">
-        <div className="w-full px-16">
+        <div className="w-full px-4">
           <div className="mb-5">
             <h1
-              className="px-fade-anim m-0 font-['Thunder',Impact,sans-serif] text-[clamp(55px,14vw,200px)] font-bold uppercase leading-[0.8] tracking-[-0.02em] text-px-black"
+              className="px-fade-anim m-0 font-['Thunder',Impact,sans-serif] text-[clamp(55px,14vw,200px)] font-bold uppercase leading-[0.8] text-px-black"
               data-delay="0"
             >
               {messages.blogTitle}
@@ -77,7 +77,7 @@ export default function BlogPageContent({
       </section>
 
       <section className="pb-[90px]">
-        <div className="w-full px-16">
+        <div className="w-full px-4">
           <div className="mb-[60px] border-y border-[rgba(30,30,30,0.08)] py-2.5">
             <div className="flex flex-col gap-3 xl:flex-row xl:items-center xl:justify-between">
               <div className="flex flex-wrap">
@@ -90,7 +90,7 @@ export default function BlogPageContent({
                       key={f}
                       type="button"
                       onClick={() => setFilter(f)}
-                      className={`mb-1.5 mr-[5px] inline-flex cursor-pointer rounded-[6px] border-0 px-[22px] py-3 text-sm font-medium uppercase leading-none tracking-[-0.2px] transition-all duration-300 xl:px-[30px] xl:text-[15px] ${
+                      className={`mb-1.5 mr-[5px] w-fit inline-flex cursor-pointer rounded-[6px] border-0 px-[22px] py-3 text-sm font-medium uppercase leading-none  transition-all duration-300 xl:px-[30px] xl:text-[15px] ${
                         active
                           ? "bg-[#e11010] text-white"
                           : "bg-[#f5f5f5] text-px-black hover:bg-[#e11010] hover:text-white"
@@ -125,7 +125,7 @@ export default function BlogPageContent({
                         if (!query) setSearchOpen(false);
                       }}
                       aria-label={messages.searchAria}
-                      className={`inline-block h-11 border-0 bg-transparent pl-[35px] text-sm font-normal tracking-[-0.02em] text-px-black outline-none transition-[width] duration-300 placeholder:text-black/60 ${
+                      className={`inline-block h-11 border-0 bg-transparent pl-[35px] text-sm font-normal text-px-black outline-none transition-[width] duration-300 placeholder:text-black/60 ${
                         searchActive ? "w-[min(240px,70vw)]" : "w-[95px]"
                       }`}
                     />
@@ -185,10 +185,10 @@ export default function BlogPageContent({
                     </div>
                   </Link>
                   <div>
-                    <span className="mb-0.5 inline-block text-[15px] font-semibold tracking-[-0.03em] text-px-black">
+                    <span className="mb-0.5 inline-block text-[15px] font-semibold  text-px-black">
                       {messages.studioNews}
                     </span>
-                    <h2 className="mb-1.5 mt-0 font-['Thunder',Impact,sans-serif] text-[clamp(28px,3vw,40px)] font-medium leading-[1.05] tracking-[-0.02em]">
+                    <h2 className="mb-1.5 mt-0 font-['Thunder',Impact,sans-serif] text-[clamp(28px,3vw,40px)] font-medium leading-[1.05]">
                       <Link
                         href={`/blog/${post.slug}`}
                         className="text-inherit no-underline transition-colors duration-250 hover:text-[#e11010]"
@@ -196,7 +196,7 @@ export default function BlogPageContent({
                         {post.title}
                       </Link>
                     </h2>
-                    <span className="text-sm font-medium tracking-[-0.03em] text-[rgba(30,30,30,0.5)]">
+                    <span className="text-sm font-medium text-[rgba(30,30,30,0.5)]">
                       {messages.publishedOn} {post.dateLabel}
                     </span>
                   </div>
