@@ -32,7 +32,9 @@ export default async function RootLayout({
   return (
     <html lang={lang}>
       <body className={`${inter.variable} antialiased`}>
-        <SmoothScroll>{children}</SmoothScroll>
+        <SmoothScroll>
+          {children}
+        </SmoothScroll>
       </body>
     </html>
   );

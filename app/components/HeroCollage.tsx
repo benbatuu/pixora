@@ -113,13 +113,13 @@ export default function HeroCollage({
       {/* design / Studio bottom — merged DesignTitle */}
       <div className="relative text-center px-fade-anim" data-delay=".3">
           <h4 className="flex items-center justify-center gap-3 md:gap-6">
-            <span className="font-thunder text-8xl md:text-[128px] lg:text-[236px] xl:text-[256px] font-bold uppercase leading-[0.85] text-px-black pt-6">{bottomLeft}</span>
-            <i className="hidden xl:block text-4xl">
+            <span className="font-thunder text-[clamp(64px,12vw,360px)] font-bold uppercase leading-[0.85] text-px-black pt-6">{bottomLeft}</span>
+            <i className="hidden xl:block text-2xl">
               <span className="max-w-[12ch] whitespace-pre-line text-center">
                 {bottomTagline}
               </span>
             </i>
-            <span className="font-thunder text-8xl md:text-[128px] lg:text-[236px] xl:text-[256px] font-bold uppercase leading-[0.85] text-px-black pt-6">{bottomRight}</span>
+            <span className="font-thunder text-[clamp(64px,12vw,360px)] font-bold uppercase leading-[0.85] text-px-black pt-6">{bottomRight}</span>
           </h4>
         </div>
     </section>

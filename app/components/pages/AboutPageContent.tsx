@@ -94,7 +94,7 @@ export default function AboutPageContent({
       <section className="border-b border-[#1e1e1e0f] pt-[80px] md:pt-[calc(120px+48px)] pb-[150px] max-lg:pt-[120px] max-lg:pb-[90px]">
         <div className="w-full mx-auto">
           <div className="text-center">
-            <h2 className="mb-12.5 mt-0 font-thunder text-7xl md:text-[172px] lg:text-[376px] font-semibold uppercase tracking-[0.09em] text-px-red">
+            <h2 className="mb-12.5 mt-0 font-thunder text-[clamp(64px,12vw,360px)] font-semibold uppercase tracking-[0.08em] text-px-red">
               {hero.title}
             </h2>
           </div>
@@ -161,6 +161,7 @@ export default function AboutPageContent({
             <div className="[&_p]:mb-0 [&_p]:font-thunder [&_p]:text-[36px] [&_p]:font-semibold [&_p]:uppercase [&_p]:leading-none [&_p]:tracking-[-1px] [&_p]:text-px-black min-[576px]:[&_p]:text-[54px] lg:[&_p]:text-[75px] xl:[&_p]:text-[85px] min-[1600px]:[&_p]:text-[100px] [&_p_span]:text-[#e11010]">
               <p>
                 {hero.lead}{" "}
+                <br />
                 <span>{hero.leadAccent}</span>
               </p>
             </div>
@@ -240,19 +241,19 @@ export default function AboutPageContent({
       </div>
 
       {/* 6. OUR SOLUTIONS — label left, list right */}
-      <section className="pt-20 pb-20">
+      <section className="py-10">
         <div className="w-full">
           <div className="grid grid-cols-1 gap-10 lg:grid-cols-12">
-            <div className="lg:col-span-4">
+            <div className="w-full lg:col-span-4">
               <span className="inline-block text-base font-medium tracking-[-0.03em] text-px-black">{hero.solutionsHeading}</span>
             </div>
             <div className="lg:col-span-8">
               <div className="aus-service-content-wrap">
                 <div className="mb-2 grid-cols-2 gap-4 hidden md:grid lg:grid">
-                  <label className="pl-20 text-sm font-medium uppercase tracking-wide text-[var(--px-black)]">
+                  <label className="pl-20 text-sm font-medium uppercase tracking-wide text-(--px-black)">
                     {hero.solutionsServicesLabel ?? messages.servicesCol}
                   </label>
-                  <label className="text-sm font-medium uppercase tracking-wide text-[var(--px-black)]">
+                  <label className="text-sm font-medium uppercase tracking-wide text-(--px-black)">
                     {hero.solutionsInfoLabel ?? messages.infoCol}
                   </label>
                 </div>
@@ -276,7 +277,7 @@ export default function AboutPageContent({
       </section>
 
       {/* 7. Team — 4 square-ish cards in a row */}
-      <section className="pt-[130px] pb-10">
+      <section className="py-0 lg:py-10">
         <div className="w-full">
           <div className="mb-[60px] flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
             <h3 className="mb-0 whitespace-pre-line font-thunder text-[48px] font-bold leading-[0.9] tracking-[-0.02em] text-px-black md:text-[72px] xl:text-[100px]">
@@ -319,9 +320,9 @@ export default function AboutPageContent({
           </div>
         </div>
       </section>
-
-      {/* 8. Awards — title + 4-column rows */}
-      <Awards />
+      <section className="py-4 md:py-6 lg:py-10">
+        <Awards />
+      </section>
     </div>
   );
 }

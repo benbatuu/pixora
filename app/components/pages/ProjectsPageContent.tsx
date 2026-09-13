@@ -25,13 +25,12 @@ export default function ProjectsPageContent({
 
   return (
     <div className="bg-white text-px-black">
-      <section className="pt-[120px] pb-10 md:pt-[200px] md:pb-[70px] lg:pt-[250px] lg:pb-[110px]">
+      <section className="pt-25 pb-10 md:pt-40 md:pb-20 lg:pt-25 lg:pb-10">
         <div className="w-full">
           <div className="text-center">
-            <h1 className="m-0 font-['Thunder',Impact,sans-serif] text-[86px] md:text-[200px] lg:text-[360px] font-bold uppercase leading-[0.8] text-px-black">
-              <span className="text-[#e11010]">{messages.projectsEyebrow}</span>{" "}
-              <br />
-              <span className="text-[64px] md:text-[148px] lg:text-[256px] tracking-[0.02em]">
+            <h1 className="m-0 font-['Thunder',Impact,sans-serif] font-bold uppercase leading-tight  text-px-black">
+              <span className="text-[#e11010] text-[clamp(24px,8vw,140px)]">{messages.projectsEyebrow}</span>{" "}<br/>
+              <span className="text-[clamp(36px,8vw,140px)]">
                 {messages.projectsTitleRest}
               </span>
             </h1>

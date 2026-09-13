@@ -163,8 +163,8 @@ export default function Footer({
         </div>
       </div>
 
-      <div className="w-full px-4">
-        <h2 className="font-thunder text-[90px] md:text-[148px] lg:text-[252px] font-bold uppercase lg:tracking-[0.3em] md:tracking-wider text-px-red">
+      <div className="w-full px-4 mx-auto place-items-center">
+        <h2 className="font-thunder text-[clamp(78px,14vw,256px)] font-bold uppercase tracking-[clamp(0.07em,1.5vw,2em)] text-px-red">
             {chrome.copyrightName}
         </h2>
       </div>

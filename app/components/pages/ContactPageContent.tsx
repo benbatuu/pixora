@@ -140,13 +140,13 @@ export default function ContactPageContent({
     
   return (
     <div ref={rootRef} className="bg-white text-px-black">
-      <section className="pt-20">
+      <section className="pt-24">
         <div className="text-center" data-delay="0">
-            <h3 className="font-thunder font-bold uppercase text-[#1e1e1e] text-8xl md:text-[232px] lg:text-[480px]">{title}</h3>
+            <h3 className="font-thunder font-bold uppercase text-[#1e1e1e] text-[clamp(48px,12vw,480px)]">{title}</h3>
           </div>
       </section>
 
-      <section className="pb-16 md:pb-20">
+      <section className="py-16 md:py-20">
         <div className="w-full px-4">
           <div className="grid grid-cols-1 items-start gap-12 lg:grid-cols-12 lg:gap-10">
             <div className="px-fade-anim pb-[50px] lg:col-span-4" data-delay="0.08">
@@ -318,7 +318,7 @@ export default function ContactPageContent({
       <section className="bg-[#F7F7F7] pt-20 pb-[90px] lg:pt-[120px] lg:pb-[130px]">
         <div className="w-full px-4">
           <div className="px-fade-anim mb-5" data-delay="0.05">
-            <h2 className="m-0 font-['Thunder',Impact,sans-serif] text-[clamp(55px,10vw,140px)] font-semibold uppercase leading-none text-[#1e1e1e]">
+            <h2 className="m-0 font-['Thunder',Impact,sans-serif] text-[clamp(24px,8vw,180px)] font-semibold uppercase leading-none text-[#1e1e1e]">
               {officesHeading}
             </h2>
           </div>

@@ -59,9 +59,9 @@ export default function BlogDetailContent({
 
   return (
     <div className="bg-white text-[var(--px-black)]">
-      <section className="pt-[80px] pb-8 md:pt-[160px]">
+      <section className="pb-8">
         <div className="w-full">
-          <div className="relative aspect-[4/3] w-full overflow-hidden bg-[#f2f2f2] md:aspect-[2/1]">
+          <div className="relative w-full h-[420px] overflow-hidden rounded-bl-2xl rounded-br-2xl bg-[#f2f2f2] md:h-[calc(100dvh-300px)]">
             <Image
               src={cover}
               alt={post.title}
@@ -70,36 +70,69 @@ export default function BlogDetailContent({
               sizes="100vw"
               priority
             />
-          </div>
-        </div>
-      </section>
 
-      <section className="pb-6">
-        <div className="w-full px-4">
-          <div className="flex flex-wrap items-center justify-center gap-4 text-sm text-[var(--px-body)] md:gap-6">
-            <div className="flex items-center gap-3">
-              <div className="relative h-10 w-10 overflow-hidden rounded-full">
-                <Image
-                  src={authorImage}
-                  alt={authorName}
-                  fill
-                  className="object-cover"
-                  sizes="40px"
-                />
-              </div>
-              <span className="font-medium text-[var(--px-black)]">{authorName}</span>
+            {/* Progressive blur — görselin alt yarısından başlayıp aşağı doğru güçlenir */}
+            <div className="pointer-events-none absolute inset-0 overflow-hidden rounded-bl-2xl rounded-br-2xl">
+              <div
+                className="absolute inset-0 backdrop-blur-[2px]"
+                style={{
+                  maskImage: "linear-gradient(to bottom, transparent 45%, black 60%)",
+                  WebkitMaskImage: "linear-gradient(to bottom, transparent 45%, black 60%)",
+                }}
+              />
+              <div
+                className="absolute inset-0 backdrop-blur-[6px]"
+                style={{
+                  maskImage: "linear-gradient(to bottom, transparent 55%, black 72%)",
+                  WebkitMaskImage: "linear-gradient(to bottom, transparent 55%, black 72%)",
+                }}
+              />
+              <div
+                className="absolute inset-0 backdrop-blur-[14px]"
+                style={{
+                  maskImage: "linear-gradient(to bottom, transparent 68%, black 100%)",
+                  WebkitMaskImage: "linear-gradient(to bottom, transparent 68%, black 100%)",
+                }}
+              />
+              {/* Kontrast için hafif karartma */}
+              <div
+                className="absolute inset-0"
+                style={{
+                  background: "linear-gradient(to bottom, transparent 50%, rgba(0,0,0,0.28) 100%)",
+                }}
+              />
             </div>
-            <span>{post.dateLabel}</span>
-            {post.comments > 0 ? (
-              <span>
-                {post.comments} {messages.commentsLabel}
-              </span>
-            ) : null}
-            {post.readTime ? <span>{post.readTime}</span> : null}
+
+            {/* Title ve meta bilgiler — tüm breakpoint'lerde görselin üzerinde */}
+            <div className="absolute inset-x-0 bottom-0 pb-6 md:pb-10">
+              <div className="w-full px-4">
+                <div className="flex flex-wrap items-center justify-center gap-3 text-xs text-white/90 md:gap-6 md:text-sm">
+                  <div className="flex items-center gap-3">
+                    <div className="relative h-10 w-10 overflow-hidden rounded-full">
+                      <Image
+                        src={authorImage}
+                        alt={authorName}
+                        fill
+                        className="object-cover"
+                        sizes="40px"
+                      />
+                    </div>
+                    <span className="font-medium text-white">{authorName}</span>
+                  </div>
+                  <span>{post.dateLabel}</span>
+                  {post.comments > 0 ? (
+                    <span>
+                      {post.comments} {messages.commentsLabel}
+                    </span>
+                  ) : null}
+                  {post.readTime ? <span>{post.readTime}</span> : null}
+                </div>
+                <h1 className="mt-5 text-center font-thunder text-[clamp(32px,7vw,96px)] leading-[0.95] text-white md:mt-8">
+                  {post.title}
+                </h1>
+              </div>
+            </div>
           </div>
-          <h1 className="mt-8 text-center font-thunder text-[clamp(40px,7vw,96px)] leading-[0.95] tracking-[-0.03em]">
-            {post.title}
-          </h1>
         </div>
       </section>
 
@@ -117,7 +150,7 @@ export default function BlogDetailContent({
 
               {quote?.text ? (
                 <blockquote className="mt-10 rounded-2xl border border-black/10 bg-[#fafafa] p-6 md:p-8">
-                  <p className="font-thunder text-[clamp(24px,3vw,36px)] leading-[1.15] tracking-[-0.02em]">
+                  <p className="font-thunder text-[clamp(24px,3vw,36px)] leading-[1.15]">
                     “{quote.text}”
                   </p>
                   {quote.cite ? (
@@ -200,7 +233,7 @@ export default function BlogDetailContent({
                             </p>
                             <button
                               type="button"
-                              className="mt-3 text-xs font-semibold uppercase tracking-wide text-[var(--px-black)]"
+                              className="mt-3 text-xs font-semibold uppercase text-[var(--px-black)]"
                             >
                               {messages.replyLabel}
                             </button>
@@ -237,7 +270,7 @@ export default function BlogDetailContent({
                       />
                       <button
                         type="submit"
-                        className="inline-flex min-h-[48px] items-center justify-center rounded-full bg-[var(--px-red)] px-8 text-sm font-semibold uppercase tracking-wide text-white md:col-span-2 md:w-fit"
+                        className="inline-flex min-h-[48px] items-center justify-center rounded-full bg-[var(--px-red)] px-8 text-sm font-semibold uppercase text-white md:col-span-2 md:w-fit"
                       >
                         {messages.postComment}
                       </button>

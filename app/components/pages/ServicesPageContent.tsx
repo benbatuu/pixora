@@ -188,26 +188,26 @@ export default function ServicesPageContent({
   const marqueeSlides = [...MARQUEE, ...MARQUEE, ...MARQUEE];
 
   return (
-    <div className="px-services-page bg-white text-[var(--px-black)]">
+    <div className="bg-white text-(--px-black)">
       {/* 1. Hero — cream #FFF5F3 */}
       <section
-        className="px-inner-service-2-ptb pt-[120px] md:pt-[160px] pb-10 md:pt-[200px] md:pb-20"
+        className="px-inner-service-2-ptb pt-[120px] md:pt-[160px] pb-0 md:pb-10 md:pt-[200px] md:pb-20"
         style={{ backgroundColor: "#FFF5F3" }}
       >
-        <div className="w-full px-4">
+        <div className="w-full">
           <div className="grid grid-cols-1 items-end gap-10 xl:grid-cols-12">
-            <div className="xl:col-span-8">
+            <div className="xl:col-span-8 px-4">
               <div className="px-inner-service-2-heading">
-                <h1 className="px-inner-service-2-title m-0 font-['Thunder',Impact,sans-serif] text-[clamp(96px,16vw,300px)] font-bold uppercase leading-[0.8] tracking-[-0.02em] text-px-black [&_br]:hidden lg:[&_br]:block [&_span]:text-[#e11010] whitespace-pre-line">
+                <h1 className="px-inner-service-2-title m-0 font-['Thunder',Impact,sans-serif] text-[clamp(88px,12vw,264px)] font-bold uppercase leading-[0.8] tracking-[-0.02em] text-px-black [&_br]:hidden lg:[&_br]:block [&_span]:text-[#e11010] whitespace-pre-line">
                   {hero.titleLine1}{" "}
                   <span>{hero.titleAccent}</span>
                 </h1>
               </div>
             </div>
-            <div className="xl:col-span-4 my-auto">
+            <div className="xl:col-span-4 my-auto px-0 md:px-4">
               <div className="flex justify-center md:justify-end">
                 <div className="[&_video]:ml-auto [&_video]:block [&_video]:h-[512px] md:[&_video]:w-[1024px] md:[&_video]:max-w-[512px] [&_video]:object-cover">
-                  <div className="mb-5 hidden text-end xl:block">
+                  <div className="mb-0 md:mb-5 hidden text-end xl:block">
                     <Image
                       src={hero.shapeUrl || "/assets/img/shape/shape-1.png"}
                       alt="shape"
@@ -227,8 +227,7 @@ export default function ServicesPageContent({
       </section>
 
       {/* 2. Red marquee style-5 */}
-      <div className="px-text-slider-area">
-        <div
+      <div
           className="px-text-slider-wrap px-text-slider-style-5 overflow-hidden pt-6 md:pt-8"
           style={{ backgroundColor: "#e11010" }}
         >
@@ -257,7 +256,6 @@ export default function ServicesPageContent({
             ))}
           </Swiper>
         </div>
-      </div>
 
       {/* 3. Intro */}
       <section
@@ -452,14 +450,15 @@ export default function ServicesPageContent({
           className="px-step-item relative z-[1] flex h-[920px] w-full flex-col justify-end bg-[#f7f7f7] max-lg:h-auto max-lg:min-h-[70vh]"
           style={{ backgroundColor: "#F7F7F7" }}
         >
-          <div className="px-step-video pointer-events-none absolute top-[11%] left-[9%] z-[1] bg-transparent leading-none mix-blend-multiply max-lg:left-[4%] max-lg:w-[min(70%,420px)] max-md:left-[-38%] [&_video]:block [&_video]:h-auto [&_video]:w-[1160px] [&_video]:bg-[#f7f7f7] [&_video]:mix-blend-multiply">
+          <div className="pointer-events-none absolute mt-30 md:mt-0 z-1 w-120 h-full bg-transparent leading-none mix-blend-multiply lg:top-[11%] lg:left-[9%] lg:w-auto max-lg:left-[4%] max-lg:w-[min(70%,420px)] max-md:left-[3%] max-md:w-[100%] max-md:top-[6%] [&_video]:block [&_video]:h-auto [&_video]:w-full lg:[&_video]:w-[1160px] [&_video]:bg-[#f7f7f7] [&_video]:mix-blend-multiply">
             <video loop muted autoPlay playsInline preload="auto" controls={false}>
               <source src="/assets/video/step-video.mp4" type="video/mp4" />
             </video>
           </div>
-          <div className="px-step-num pointer-events-none absolute top-[120px] left-14 z-[2] max-md:top-[60px] max-md:left-5 [&_span]:inline-block [&_span]:font-['Thunder',Impact,sans-serif] [&_span]:text-[160px] [&_span]:font-bold [&_span]:uppercase [&_span]:leading-[1.3] [&_span]:text-px-black max-lg:[&_span]:text-[110px]">
-              <span>{stepsEyebrow}</span>
-            </div>
+
+          <div className="px-step-num pointer-events-none absolute top-25 left-14 z-[2] max-md:top-[60px] max-md:left-5 [&_span]:inline-block [&_span]:font-['Thunder',Impact,sans-serif] [&_span]:text-[160px] [&_span]:font-bold [&_span]:uppercase [&_span]:leading-[1.3] [&_span]:text-px-black max-lg:[&_span]:text-[110px]">
+            <span>{stepsEyebrow}</span>
+          </div>
           <div className="w-full relative z-10">
             <div className="px-step-bottom relative z-10 border-y border-[#1e1e1e] bg-[#f7f7f7] px-[45px] py-2.5 max-md:px-5" style={{ backgroundColor: "#F7F7F7" }}>
               <div className="grid grid-cols-1 gap-2 md:grid-cols-12 md:items-center">

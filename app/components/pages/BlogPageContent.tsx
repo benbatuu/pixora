@@ -67,7 +67,7 @@ export default function BlogPageContent({
         <div className="w-full px-4">
           <div className="mb-5">
             <h1
-              className="px-fade-anim m-0 font-['Thunder',Impact,sans-serif] text-[clamp(55px,14vw,200px)] font-bold uppercase leading-[0.8] text-px-black"
+              className="px-fade-anim m-0 font-['Thunder',Impact,sans-serif] text-[clamp(24px,12vw,240px)] font-bold uppercase leading-[0.8] text-px-black"
               data-delay="0"
             >
               {messages.blogTitle}
